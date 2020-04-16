@@ -61,8 +61,7 @@ input
 .center
   padding: 0 calc(50% - 570px)
 
-.color
-  color: $selectColor !important
+/* .color defined in _mixins */
 
 .transition
   transition: all 3.3s
