@@ -61,8 +61,8 @@
           <div>TOTAL</div>
           <div>$500.00</div>
         </div>
-        <a class="cart__checkout" href="/checkout.html">Checkout</a>
-        <a class="cart__gtc" href="/cart.html">Go to cart</a>
+        <router-link class="cart__checkout" to="checkout">Checkout</router-link>
+        <router-link class="cart__gtc" to="cart">Go to cart</router-link>
       </div>
     </a>
   </div>

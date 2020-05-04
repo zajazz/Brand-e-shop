@@ -1,51 +1,47 @@
 <template>
   <nav class="nav center">
+{{    MENU_ITEMS }}
     <ul class="menu">
-      <li class="menu__list"><router-link class="menu__link" to="/">Home </router-link>
-      </li>
-      <li class="menu__list"><a class="menu__link" href="/product.html">Man </a>
-        <!--    DROPDOWN MENU  -->
-        <NavDrop></NavDrop>
-      </li>
-      <li class="menu__list">
-        <router-link class="menu__link" to="/catalog/:id">Women </router-link></li>
-      <li class="menu__list">
-        <router-link class="menu__link" to="/catalog/:id">Kids </router-link></li>
-      <li class="menu__list">
-        <router-link class="menu__link" to="/catalog/:id">Accessories </router-link></li>
-      <li class="menu__list">
-        <router-link class="menu__link" to="/catalog/:id">Featured </router-link></li>
-      <li class="menu__list">
-        <router-link class="menu__link" to="/catalog/:id">Hot Deals</router-link>
-        <!--    DROPDOWN MENU  -->
-        <div class="drop drop_last">
-          <div class="drop__chapter">
-            <h3 class="drop__h3">Accessories</h3>
-            <ul class="drop__ul">
-              <li><a class="drop__link" href="/product.html">Dresses </a></li>
-              <li><a class="drop__link" href="/product.html">Tops </a></li>
-              <li><a class="drop__link" href="/product.html">Sweaters/Knits </a></li>
-            </ul>
-            <h3 class="drop__h3">Accessories</h3>
-            <ul class="drop__ul">
-              <li><a class="drop__link" href="/product.html">Dresses </a></li>
-              <li><a class="drop__link" href="/product.html">Tops </a></li>
-              <li><a class="drop__link" href="/product.html">Sweaters/Knits </a></li>
-            </ul>
-          </div>
-        </div>
+      <li class="menu__list"  v-for="menuItem of MENU_ITEMS" :key="menuItem.id">
+        <router-link class="menu__link" :to="link(menuItem.id)">{{ menuItem.name }}</router-link>
+        <NavDrop v-if="menuItem.subcategories.length"
+                 :category="menuItem" :subs="getSubcat(menuItem.subcategories)"/>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
-import NavDrop from './NavDrop.vue';
+import { mapGetters, mapActions } from 'vuex';
+import NavDrop from './elements/NavDrop.vue';
+
 
 export default {
   name: 'Navigation',
   components: {
     NavDrop,
+  },
+  data() {
+    return {
+      subCategories: null,
+    };
+  },
+  methods: {
+    ...mapActions(['fetchCategories']),
+    link(id) {
+      return id === 1 ? '/' : `/catalog/${id}`;
+    },
+    getSubcat(ids) {
+      return this.subCategories.filter((item) => ids.includes(item.id));
+    },
+  },
+  computed: {
+    ...mapGetters(['MENU_ITEMS', 'PropsList']),
+  },
+  mounted() {
+    /* eslint no-underscore-dangle: ["error", { "allow": ["_actions"] }] */
+    // eslint-disable-line no-underscore-dangle
+    this.fetchCategories();
   },
 };
 </script>

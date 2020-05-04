@@ -1,6 +1,8 @@
-const path = require('path');
+// const path = require('path');
 
 module.exports = {
+  // publicPath: '/',
+  // outputDir: process.env.NODE_ENV === 'development' ? './dev/public/' : './dist/public/',
   pages: {
     index: {
       entry: 'src/main.js',
@@ -19,6 +21,15 @@ module.exports = {
         './src/sass/_vars.sass',
         './src/sass/_mixins.sass',
       ],
+    },
+  },
+  devServer: {
+    proxy: {
+      '^/api': {
+        target: 'http://localhost:3000',
+        ws: true,
+        changeOrigin: true,
+      },
     },
   },
 };

@@ -199,17 +199,6 @@ export default {
     color: $darkColor
     text-align: left
 
-.service_input
-  height: 45px
-  width: 100%
-  background-color: $bgColor
-  border: 1px solid #eaeaea
-  margin-bottom: 20px
-  padding: 14px 18px
-  font-size: 13px
-  font-weight: 300
-  color: #b1b1b1
-
 .line
   height: 1px
   width: 100%

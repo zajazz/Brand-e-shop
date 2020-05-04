@@ -1,0 +1,183 @@
+{
+    "menuItems": [
+        {
+            "id": 1,
+            "name": "Home",
+            "subcategories": []
+        },
+        {
+            "id": 2,
+            "name": "Man",
+            "subcategories": [2,3,5,6,7]
+        },
+        {
+            "id": 3,
+            "name": "Woman",
+            "subcategories": [1,2,3,4,5,6,7,8]
+        },
+        {
+            "id": 4,
+            "name": "Kids",
+            "subcategories": [1,2,4,5,7,8]
+        },
+        {
+            "id": 5,
+            "name": "Accessories",
+            "subcategories": []
+        },
+        {
+            "id": 6,
+            "name": "Featured",
+            "subcategories": []
+        },
+        {
+            "id": 7,
+            "name": "Hot Deals",
+            "subcategories": []
+        }
+    ],
+    "subcategories": [
+        {
+            "id": 1,
+            "name": "Dresses"
+        },
+        {
+            "id": 2,
+            "name": "Sweaters/Knits"
+        },
+        {
+            "id": 3,
+            "name": "Tops"
+        },
+        {
+            "id": 4,
+            "name": "Skirts/Shorts"
+        },
+        {
+            "id": 5,
+            "name": "Jackets/Coats"
+        },
+        {
+            "id": 6,
+            "name": "Blazers"
+        },
+        {
+            "id": 7,
+            "name": "Denim"
+        },
+        {
+            "id": 8,
+            "name": "Leggings/Pants"
+        }
+    ],
+    "brands": [
+        {
+            "id": 1,
+            "brand": "Zara"
+        },
+        {
+            "id": 2,
+            "brand": "Mango"
+        },
+        {
+            "id": 3,
+            "brand": "Kenzo"
+        },
+        {
+            "id": 4,
+            "brand": "Lacoste"
+        },
+        {
+            "id": 5,
+            "brand": "Marc Jacobs"
+        },
+        {
+            "id": 6,
+            "brand": "MOSCHINO"
+        }
+    ],
+    "designers": [
+        {
+            "id": 1,
+            "name": "BINBURHAN"
+        },
+        {
+            "id": 2,
+            "name": "Marc Jacobs"
+        },
+        {
+            "id": 3,
+            "name": "Cherutti"
+        }
+    ],
+    "colors": [
+        {
+            "id": 1,
+            "color": "red",
+            "code": "#ef5b70"
+        },
+        {
+            "id": 2,
+            "color": "grey",
+            "code": "#5e5e5e"
+        },
+        {
+            "id": 3,
+            "color": "black",
+            "code": "#222"
+        },
+        {
+            "id": 4,
+            "color": "white",
+            "code": "#fff"
+        }
+    ],
+    "sizes": [
+        {
+            "id": 1,
+            "size": "XS"
+        },
+        {
+            "id": 2,
+            "size": "S"
+        },
+        {
+            "id": 3,
+            "size": "M"
+        },
+        {
+            "id": 4,
+            "size": "L"
+        },
+        {
+            "id": 5,
+            "size": "XL"
+        },
+        {
+            "id": 6,
+            "size": "XXL"
+        }
+    ],
+    "materials": [
+        {
+            "id": 1,
+            "material": "cotton"
+        },
+        {
+            "id": 2,
+            "material": "Cashmere"
+        },
+        {
+            "id": 3,
+            "material": "Fur"
+        },
+        {
+            "id": 4,
+            "material": "Leather"
+        },
+        {
+            "id": 5,
+            "material": "Viscose"
+        }
+    ]
+}

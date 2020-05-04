@@ -7,24 +7,24 @@
         <h4 class="offer__h4">FOR MEN</h4>
       </div>
     </router-link>
-    <a class="offer__block offer2_img rectangle" href="/product.html">
+    <router-link to="/catalog" class="offer__block offer2_img rectangle">
       <div class="offer__content">
         <h5 class="offer__h5">LUXIROUS & trendy </h5>
         <h4 class="offer__h4">ACCESORIES</h4>
       </div>
-    </a>
-    <a class="offer__block offer3_img rectangle" href="/product.html">
+    </router-link>
+    <router-link to="/catalog" class="offer__block offer3_img rectangle">
       <div class="offer__content">
         <h5 class="offer__h5">30% offer</h5>
         <h4 class="offer__h4">women</h4>
       </div>
-    </a>
-    <a class="offer__block offer4_img square" href="/product.html">
+    </router-link>
+    <router-link to="/catalog" class="offer__block offer4_img square">
       <div class="offer__content">
         <h5 class="offer__h5">new arrivals </h5>
         <h4 class="offer__h4">FOR kids</h4>
       </div>
-    </a>
+    </router-link>
   </section>
 </template>
 

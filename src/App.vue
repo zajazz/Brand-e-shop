@@ -1,21 +1,16 @@
 <template>
   <div id="app">
     <!-- Шапка -->
-    <Header></Header>
-    <Navigation></Navigation>
+    <Header ref="Header" />
+    <Navigation ref="Navigation"/>
     <!-- /Шапка -->
     <router-view/>
 
     <!-- Подвал -->
-    <Subscribe></Subscribe>
-    <Footer></Footer>
+    <Subscribe />
+    <Footer />
     <!-- /Подвал -->
 
-   <!--     cсылки
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
-    </div>     -->
   </div>
 </template>
 
@@ -27,11 +22,18 @@ import Footer from './components/Footer.vue';
 
 export default {
   name: 'Home',
+  data() {
+    return {
+    };
+  },
   components: {
     Header,
     Navigation,
     Subscribe,
     Footer,
+  },
+  mounted() {
+
   },
 };
 </script>
@@ -39,7 +41,7 @@ export default {
 <style lang="sass">
 /*a
   &.router-link-exact-active
-    color: #42b983*/
+    color: #42b983 */
 *
   margin: 0
   padding: 0
@@ -57,6 +59,25 @@ a
 input
   &:active, &:focus
     outline: none
+
+summary::-webkit-details-marker
+  display: none
+
+summary::after
+  content: '\f0dd'
+  padding-right: 6px
+  color: #6f6e6e
+  font-size: 14px
+  font-family: 'FontAwesome'
+
+details[open] > summary::after
+  content: '\f0de'
+  color: #ef5b70
+  font-size: 14px
+  font-family: 'FontAwesome'
+
+details[open] > summary
+  color: #ef5b70
 
 .center
   padding: 0 calc(50% - 570px)
