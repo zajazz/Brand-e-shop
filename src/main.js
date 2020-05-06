@@ -1,7 +1,9 @@
 import Vue from 'vue';
+import { mapActions } from 'vuex';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+
 
 Vue.config.productionTip = false;
 
@@ -9,15 +11,12 @@ Vue.config.productionTip = false;
 new Vue({
   data() {
     return {
-      goods: [],
-      cart: [],
-      menuItems: [],
-      subcategories: [],
-      brands: [],
-      designers: [],
-      colors: [],
-      sizes: [],
-      materials: [],
+      settings: {
+        searchDropdownItems: [
+          3, // Woman
+          2, // Man
+        ],
+      },
     };
   },
   router,
@@ -25,6 +24,7 @@ new Vue({
   computed: {
   },
   methods: {
+    ...mapActions(['fetchCategories']),
     makeRequest(url, method = 'GET', data = null) {
       const headers = {};
       let body;
@@ -43,20 +43,7 @@ new Vue({
     },
   },
   mounted() {
-    this.makeRequest('/api/goods')
-      .then((data) => {
-        data.forEach((el) => this.goods.push(el));
-      });
-    this.$root.makeRequest('/api/categories')
-      .then((data) => {
-        this.menuItems = data.menuItems.slice();
-        this.subcategories = data.subcategories.slice();
-        this.brands = data.brands.slice();
-        this.designers = data.designers.slice();
-        this.colors = data.colors.slice();
-        this.sizes = data.sizes.slice();
-        this.materials = data.materials.slice();
-      });
+    this.fetchCategories();
   },
   render: (h) => h(App),
 }).$mount('#app');

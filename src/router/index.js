@@ -24,7 +24,7 @@ const routes = [
     component: () => import('../pages/Checkout.vue'),
   },
   {
-    path: '/catalog',
+    path: '/catalog*',
     name: 'Catalog',
     component: () => import('../pages/Catalog.vue'),
   },

@@ -1,11 +1,10 @@
 <template>
   <nav class="nav center">
-{{    MENU_ITEMS }}
     <ul class="menu">
-      <li class="menu__list"  v-for="menuItem of MENU_ITEMS" :key="menuItem.id">
+      <li class="menu__list" v-for="menuItem of MENU_ITEMS" v-bind:key="menuItem.id">
         <router-link class="menu__link" :to="link(menuItem.id)">{{ menuItem.name }}</router-link>
         <NavDrop v-if="menuItem.subcategories.length"
-                 :category="menuItem" :subs="getSubcat(menuItem.subcategories)"/>
+                 :category="menuItem" :subs="SubcatList(menuItem.subcategories)"/>
       </li>
     </ul>
   </nav>
@@ -21,27 +20,17 @@ export default {
   components: {
     NavDrop,
   },
-  data() {
-    return {
-      subCategories: null,
-    };
-  },
   methods: {
     ...mapActions(['fetchCategories']),
     link(id) {
       return id === 1 ? '/' : `/catalog/${id}`;
     },
-    getSubcat(ids) {
-      return this.subCategories.filter((item) => ids.includes(item.id));
+    SubcatList(ids) {
+      return this.$store.getters.PropsList('subcategories', ids);
     },
   },
   computed: {
-    ...mapGetters(['MENU_ITEMS', 'PropsList']),
-  },
-  mounted() {
-    /* eslint no-underscore-dangle: ["error", { "allow": ["_actions"] }] */
-    // eslint-disable-line no-underscore-dangle
-    this.fetchCategories();
+    ...mapGetters(['MENU_ITEMS']),
   },
 };
 </script>

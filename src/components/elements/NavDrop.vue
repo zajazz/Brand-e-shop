@@ -46,24 +46,12 @@ export default {
 
 <style lang="sass">
 .drop
-  background-color: $bgColor
-  border-radius: 5px
-  padding-left: 20px
-  padding-right: 20px
-  padding-bottom: 8px
-  display: none
-  position: absolute
-  top: 51px
-  border: 1px solid #e8e8e8
-  z-index: 100
-
   &__chapter
     width: 234px
     margin-right: 46px
 
     &:last-of-type
       margin-right: 0
-
   &__h3
     font-size: 14px
     color: #232323
@@ -72,6 +60,9 @@ export default {
     border-bottom: 1px solid #e8e8e8
     padding-bottom: 8px
     margin-top: 21px
+    cursor: pointer
+    &:hover
+      color: $selectColor
 
   &__ul
     list-style-type: none

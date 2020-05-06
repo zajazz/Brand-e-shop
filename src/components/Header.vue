@@ -32,7 +32,17 @@ export default {
 <style lang="sass">
 /*.logo
   see App.vue */
-
+.drop
+  background-color: $bgColor
+  border-radius: 5px
+  padding-left: 20px
+  padding-right: 20px
+  padding-bottom: 8px
+  display: none
+  position: absolute
+  top: 51px
+  border: 1px solid #e8e8e8
+  z-index: 100
 .header
   height: 100px
   background-color: $bgColor

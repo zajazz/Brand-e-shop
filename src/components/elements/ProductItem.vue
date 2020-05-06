@@ -1,10 +1,10 @@
 <template>
   <div class="product">
-    <router-link :to="getLink()"><div class="product__img-bg">
-      <img :alt="good.name" class="product__img" :src="good.img"></div>
+    <router-link :to="link"><div class="product__img-bg">
+      <img :alt="good.name" class="product__img" :src="img"></div>
     </router-link>
     <div class="product__content">
-      <router-link :to="getLink()" class="product__title">{{ brand }} {{good.name }}</router-link>
+      <router-link :to="link" class="product__title">{{ brand }} {{good.name }}</router-link>
       <p class="product__price">${{good.price}}.00</p>
     </div>
     <!-- Кнопка Add to cart -->
@@ -23,28 +23,24 @@ export default {
   props: ['good'],
   data() {
     return {
-      brand: this.getBrand(),
     };
   },
-  methods: {
-    getLink() {
-      return `../product/${this.good.id}`;
+  computed: {
+    brand() {
+      return this.$store.state.categories.brands.find((item) => item.id === this.good.brand).brand;
     },
+    link() {
+      return { path: '/product', query: { id: this.good.id } };
+    },
+    img() {
+      return `/img/cat/${this.good.id}.png`;
+    },
+  },
+  methods: {
     addProduct() {
       console.log(`add ${this.good.id}`);
       // TODO: заглушка для метода корзины
     },
-    getBrand() {
-      // const id = this.$root.brands.findIndex((value) => value.id === this.good.brand);
-      return this.$root.brands.find((item) => item.id === this.good.brand).brand;
-      // return this.$root.brands[id];
-    },
-  },
-  beforeMount() {
-    this.good.img = `/img/cat/${this.good.id}.png`;
-  },
-  mounted() {
-    this.getLink();
   },
 };
 </script>

@@ -5,40 +5,24 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    goods: [],
-    categories: {},
-    // cart: [],
-    // menuItems: [],
-    // subcategories: [],
-    // brands: [],
-    // designers: [],
-    // colors: [],
-    // sizes: [],
-    // materials: [],
+    goods: Array,
+    categories: Object,
+    filtered: Array,
   },
   mutations: {
     SET_CART_DATA(state, data) {
-      console.log(data);
       state.cart = [...data];
     },
     SET(state, { type, items }) {
-      console.log('SET Categories');
+      console.log('SET ', type);
       state[type] = items;
-      console.log(this.state.categories);
     },
   },
   actions: {
-    // search({ commit }) {
-    //   const regexp = new RegExp(this.searchSrting, 'i');
-    //   this.filtered = this.$root.goods.filter((el) => regexp.test(el.name));
-    //   console.log(this.filtered);
-    // },
-
     fetchCategories({ commit }) {
       fetch('/api/categories')
         .then((result) => result.json())
         .then((data) => {
-          console.log('fetchCategories');
           commit('SET', { type: 'categories', items: data });
         })
         .catch((error) => {
@@ -47,6 +31,20 @@ export default new Vuex.Store({
           console.log(error);
         });
     },
+
+    fetchGoods({ commit }) {
+      fetch('/api/goods')
+        .then((result) => result.json())
+        .then((data) => {
+          commit('SET', { type: 'goods', items: data });
+        })
+        .catch((error) => {
+          // TODO: компонент ошибок
+          // this.$refs.error.setError(error);
+          console.log(error);
+        });
+    },
+
     /**
      * Method makes api-requests and updates data.
      * @param commit
@@ -75,6 +73,9 @@ export default new Vuex.Store({
     MENU_ITEMS(state) {
       return state.categories.menuItems;
     },
+    SUBCATS(state) {
+      return state.categories.subcategories;
+    },
     CartData(state) {
       return state.cart;
     },
@@ -89,13 +90,28 @@ export default new Vuex.Store({
     },
     /**
      * Method return array of good's properties, such as colors, sizes and materials
-     * @param state
-     * @param type - property type
-     * @param ids - array of indexes
      * @return {*} - array of elements filtered by indexes
      */
-    PropsList(state, type, [ids]) {
+    // eslint-disable-next-line
+    PropsList: (state) => function(type, ids) {
+      console.log('PropsList => ', state);
       return state.categories[type].filter((el) => ids.includes(el.id));
     },
+    // eslint-disable-next-line arrow-body-style
+    Filtered: (state) => ({ qty, searchString, sortBy }) => {
+      let filteredArr = state.goods.slice();
+      if (sortBy) {
+        filteredArr = filteredArr.sort((a, b) => b[sortBy] - a[sortBy]);
+      }
+      if (searchString) {
+        const regexp = new RegExp(searchString, 'i');
+        filteredArr = filteredArr.filter((el) => regexp.test(el.name));
+      }
+      if (qty) {
+        filteredArr = filteredArr.slice(0, qty);
+      }
+      return filteredArr;
+    },
+
   },
 });
