@@ -1,13 +1,13 @@
 <template>
   <section class="product-box product_align center">
 
-    <ProductItem v-for="good in filtered" v-bind:key="good.id" :good="good" />
+    <ProductItem v-for="good in productList" v-bind:key="good.id" :good="good" />
 
   </section>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import ProductItem from './elements/ProductItem.vue';
 
 export default {
@@ -16,24 +16,18 @@ export default {
     ProductItem,
   },
   props: ['featured', 'qty'],
-  data() {
-  },
   computed: {
-    filtered() {
-      const paramObj = {
-        qty: this.qty,
-        searchString: null,
-        sortBy: this.featured ? 'sold' : null,
-      };
-      return this.$store.getters.Filtered(paramObj);
-      // return [{ id: 1, name: 'Man', brand: 1 }, { id: 2, name: 'Woman ', brand: 2 }];
+    ...mapState(['filtered']),
+    productList() {
+      return this.qty ? this.filtered.slice(0, this.qty) : this.filtered;
     },
   },
   methods: {
-    ...mapActions(['fetchGoods']),
+    ...mapActions(['filterProducts']),
   },
   mounted() {
-    this.fetchGoods();
+    const param = this.featured ? 'sold' : null;
+    this.filterProducts(param);
   },
 };
 </script>

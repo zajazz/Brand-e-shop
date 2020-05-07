@@ -18,16 +18,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'ProductItem',
   props: ['good'],
-  data() {
-    return {
-    };
-  },
   computed: {
+    ...mapState(['brands']),
     brand() {
-      return this.$store.state.categories.brands.find((item) => item.id === this.good.brand).brand;
+      return this.brands.find((item) => item.id === this.good.brand).brand;
     },
     link() {
       return { path: '/product', query: { id: this.good.id } };
@@ -53,7 +52,7 @@ export default {
   transition: all $transition
   &__img
     max-width: 100%
-    max-height: 96%
+    max-height: 100%
     transition: all .4s
     &-bg
       background: #eaeaea

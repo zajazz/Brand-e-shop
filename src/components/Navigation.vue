@@ -1,7 +1,7 @@
 <template>
   <nav class="nav center">
     <ul class="menu">
-      <li class="menu__list" v-for="menuItem of MENU_ITEMS" v-bind:key="menuItem.id">
+      <li class="menu__list" v-for="menuItem of menuItems" v-bind:key="menuItem.id">
         <router-link class="menu__link" :to="link(menuItem.id)">{{ menuItem.name }}</router-link>
         <NavDrop v-if="menuItem.subcategories.length"
                  :category="menuItem" :subs="SubcatList(menuItem.subcategories)"/>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import NavDrop from './elements/NavDrop.vue';
 
 
@@ -21,16 +21,18 @@ export default {
     NavDrop,
   },
   methods: {
-    ...mapActions(['fetchCategories']),
     link(id) {
       return id === 1 ? '/' : `/catalog/${id}`;
     },
     SubcatList(ids) {
-      return this.$store.getters.PropsList('subcategories', ids);
+      return this.PROPS_LIST('subcategories', ids);
     },
   },
   computed: {
-    ...mapGetters(['MENU_ITEMS']),
+    ...mapGetters(['PROPS_LIST']),
+    ...mapState(['menuItems']),
+  },
+  mounted() {
   },
 };
 </script>

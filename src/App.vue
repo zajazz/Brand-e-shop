@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <!-- Ошибки -->
+    <div v-if="errors.length">{{ errors }}</div>
     <!-- Шапка -->
     <Header ref="Header" />
     <Navigation ref="Navigation"/>
@@ -15,6 +17,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import Header from './components/Header.vue';
 import Navigation from './components/Navigation.vue';
 import Subscribe from './components/Subscribe.vue';
@@ -22,9 +25,8 @@ import Footer from './components/Footer.vue';
 
 export default {
   name: 'Home',
-  data() {
-    return {
-    };
+  computed: {
+    ...mapState(['errors']),
   },
   components: {
     Header,
@@ -32,8 +34,12 @@ export default {
     Subscribe,
     Footer,
   },
-  mounted() {
-
+  methods: {
+    ...mapActions(['fetchCategories', 'fetchGoods']),
+  },
+  created() {
+    this.fetchCategories();
+    this.fetchGoods();
   },
 };
 </script>

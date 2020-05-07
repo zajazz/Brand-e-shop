@@ -13,8 +13,10 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-underscore-dangle': ['error', { allow: ['_actions'] }],
+    'no-underscore-dangle': 'off',
     'no-unused-vars': 'off',
     'prefer-const': 'off',
+    'object-curly-spacing': "off",
+    'padded-blocks': "off",
   },
 };
