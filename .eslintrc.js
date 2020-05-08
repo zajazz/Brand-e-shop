@@ -18,5 +18,6 @@ module.exports = {
     'prefer-const': 'off',
     'object-curly-spacing': "off",
     'padded-blocks': "off",
+    'comma-dangle': "off",
   },
 };

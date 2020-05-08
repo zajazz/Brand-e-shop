@@ -53,9 +53,13 @@ export default {
     subcatList(ids) {
       return this.PROPS_LIST('subcategories', ids);
     },
-    link(id, subId) {
-      const subIdStr = subId ? `/${subId}` : '';
-      return { path: `/catalog/${id}${subIdStr}` };
+    link(catId, subId) {
+      let sid = '';
+      if (subId) sid = subId;
+      return `/catalog/${catId}/${sid}`;
+      // const subIdStr = subId ? `/${subId}` : '';
+      // return { path: `/catalog/${id}${subIdStr}` };
+      // return { name: 'Catalog', params: { id: catId, subid: sid } };
     },
   },
   updated() {

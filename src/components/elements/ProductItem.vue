@@ -29,7 +29,7 @@ export default {
       return this.brands.find((item) => item.id === this.good.brand).brand;
     },
     link() {
-      return { path: '/product', query: { id: this.good.id } };
+      return { name: 'Product', params: { id: this.good.id } };
     },
     img() {
       return `/img/cat/${this.good.id}.png`;

@@ -13,9 +13,6 @@ const routes = [
   {
     path: '/cart',
     name: 'Cart',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import('../pages/Cart.vue'),
   },
   {
@@ -24,12 +21,23 @@ const routes = [
     component: () => import('../pages/Checkout.vue'),
   },
   {
-    path: '/catalog*',
+    path: '/catalog/',
     name: 'Catalog',
+    props: true,
     component: () => import('../pages/Catalog.vue'),
+    children: [
+      {
+        path: ':id',
+        component: () => import('../pages/Catalog.vue'),
+      },
+      {
+        path: ':id/:subid',
+        component: () => import('../pages/Catalog.vue'),
+      },
+    ],
   },
   {
-    path: '/product*',
+    path: '/product/:id',
     name: 'Product',
     component: () => import('../pages/Product.vue'),
   },

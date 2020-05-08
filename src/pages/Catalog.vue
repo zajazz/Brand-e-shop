@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ $route.params }}
     <Breadcrumb></Breadcrumb>
     <div class="main center">
       <NavLeft></NavLeft>
@@ -25,6 +26,12 @@ import ProductBox from '../components/ProductBox.vue';
 
 export default {
   name: 'Catalog',
+  props: ['id', 'subid'],
+  watch: {
+    $route(to) {
+      console.log(to.params);
+    },
+  },
   data() {
     return {
       // Quantity of products per page, 9 by default
@@ -39,6 +46,9 @@ export default {
     Paging,
     Discount,
     Breadcrumb,
+  },
+  mounted() {
+    console.log(this.$route.params);
   },
 };
 </script>
