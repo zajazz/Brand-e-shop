@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ $route.params }}
     <Breadcrumb></Breadcrumb>
     <div class="main center">
       <NavLeft></NavLeft>
@@ -26,11 +25,11 @@ import ProductBox from '../components/ProductBox.vue';
 
 export default {
   name: 'Catalog',
-  props: ['id', 'subid'],
+  // props: ['id', 'subid'],
   watch: {
-    $route(to) {
-      console.log(to.params);
-    },
+    // $route(to) {
+    //   this.changeCategory(to.params, 'watch');
+    // },
   },
   data() {
     return {
@@ -46,9 +45,6 @@ export default {
     Paging,
     Discount,
     Breadcrumb,
-  },
-  mounted() {
-    console.log(this.$route.params);
   },
 };
 </script>

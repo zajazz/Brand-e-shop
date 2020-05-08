@@ -62,9 +62,6 @@ export default {
       // return { name: 'Catalog', params: { id: catId, subid: sid } };
     },
   },
-  updated() {
-    console.log('----->', this.$store.state);
-  },
 };
 </script>
 

@@ -28,6 +28,21 @@ export default {
   computed: {
     ...mapState(['errors']),
   },
+  watch: {
+    $route(to, from) {
+      const regExp = /\/catalog*/i;
+
+      // перешли в каталог - отфильтровали товары
+      if (regExp.test(to.path)) {
+        this.$store.commit('SET_CURRENT_CAT', to.params);
+        this.$store.dispatch('filterProducts');
+      // вышли из каталога - обнуляем фильтр
+      } else if (regExp.test(from.path)) {
+        this.$store.commit('SET_CURRENT_CAT', 0);
+        this.$store.dispatch('filterProducts');
+      }
+    },
+  },
   components: {
     Header,
     Navigation,

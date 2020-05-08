@@ -16,8 +16,8 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'no-unused-vars': 'off',
     'prefer-const': 'off',
-    'object-curly-spacing': "off",
-    'padded-blocks': "off",
-    'comma-dangle': "off",
+    'object-curly-spacing': 'off',
+    'padded-blocks': 'off',
+    'comma-dangle': 'off',
   },
 };

@@ -35,9 +35,10 @@ export default new Vuex.Store({
       console.log('SET_ERROR => ', err);
       state.errors.push(err);
     },
-    SET_CURRENT_CAT(state, catID, subcatID) { // компонент каталога при загрузке вызывает setter
-      console.log('SET_CURRENT_CAT => ');
-      state.currentCat = [catID, subcatID];
+    SET_CURRENT_CAT(state, params) {
+      state.currentCat[0] = params.id ? +params.id : 0;
+      state.currentCat[1] = params.subid ? +params.subid : 0;
+      // console.log('SET_CURRENT_CAT => ');
     },
     SET_SEARCH_STRING(state, value) {
       state.searchString = value.trim();
@@ -46,7 +47,6 @@ export default new Vuex.Store({
     SET_FILTERED(state, data) {
       console.log('SET_FILTERED => ');
       state.filtered = [...data];
-      console.log('State.filtered: ', state.filtered);
     },
   },
   actions: {
@@ -76,7 +76,7 @@ export default new Vuex.Store({
       console.log('filterProducts ', sortBy);
       if (state.goods.length) {
         let filtered = state.goods.slice();
-        if (state.currentCat.length) {
+        if (state.currentCat.length && state.currentCat[0]) {
           const catID = state.currentCat[0];
           const subcatID = state.currentCat[1];
           filtered = filtered.filter((el) => el.category === catID);
@@ -102,7 +102,7 @@ export default new Vuex.Store({
   getters: {
     BROWSE_MENU_ITEMS(state) {
       const ids = state.settings.searchDropdownItems;
-      console.log('g:BROWSE_MENU_ITEMS > ', ids);
+      // console.log('g:BROWSE_MENU_ITEMS > ', ids);
       return state.menuItems.filter((item) => ids.includes(item.id));
     },
     /**

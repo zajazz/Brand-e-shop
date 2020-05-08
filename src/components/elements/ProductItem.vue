@@ -4,7 +4,8 @@
       <img :alt="good.name" class="product__img" :src="img"></div>
     </router-link>
     <div class="product__content">
-      <router-link :to="link" class="product__title">{{ brand }} {{good.name }}</router-link>
+      <router-link :to="link" class="product__title">{{ good.category }} {{ brand }} {{good.name
+        }}</router-link>
       <p class="product__price">${{good.price}}.00</p>
     </div>
     <!-- Кнопка Add to cart -->
