@@ -1,6 +1,7 @@
 <template>
   <section class="product-box product_align center">
-
+    <div>{{ tmp }}</div>
+    <br>
     <ProductItem v-for="good in productList" v-bind:key="good.id" :good="good" />
 
   </section>
@@ -17,7 +18,7 @@ export default {
   },
   props: ['featured', 'qty'],
   computed: {
-    ...mapState(['filtered']),
+    ...mapState(['filtered', 'tmp']),
     productList() {
       return this.qty ? this.filtered.slice(0, this.qty) : this.filtered;
     },

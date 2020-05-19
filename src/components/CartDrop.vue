@@ -1,61 +1,12 @@
 <template>
   <div class="cart">
-    <a href="/cart.html">
+    <router-link to="cart">
       <img alt="cart" class="header__cart" src="../assets/img/cart_black.svg">
       <!-- Корзина -->
+      {{ cart }}
       <div class="cart__drop">
         <div class="cart__items">
-          <div class="cart__item">
-            <a href="/single.html"><img src="../assets/img/cart2_s.png"
-                                        alt="cart_item"></a>
-            <div class="cart__item_desc">
-              <h3><a href="/single.html">Rebox Zane</a></h3>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <p>1 x $250</p>
-            </div>
-            <a href="#"><i class="fas fa-times-circle"></i></a>
-
-          </div>
-          <div class="cart__item">
-            <a href="/single.html"><img src="../assets/img/cart1_s.png"
-                                        alt="cart_item"></a>
-            <div class="cart__item_desc">
-              <h3><a href="/single.html">Rebox Zane</a></h3>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <p>1 x $250</p>
-            </div>
-            <a href="#"><i class="fas fa-times-circle"></i></a>
-
-          </div>
-          <div class="cart__item">
-            <a href="/single.html"><img src="../assets/img/cart1_s.png"
-                                        alt="cart_item"></a>
-            <div class="cart__item_desc">
-              <h3><a href="/single.html">Rebox Zane</a></h3>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <p>1 x $250</p>
-            </div>
-            <a href="#"><i class="fas fa-times-circle"></i></a>
-
-          </div>
+          <CartItem />
         </div>
         <div class="cart__total">
           <div>TOTAL</div>
@@ -64,13 +15,23 @@
         <router-link class="cart__checkout" to="checkout">Checkout</router-link>
         <router-link class="cart__gtc" to="cart">Go to cart</router-link>
       </div>
-    </a>
+    </router-link>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import CartItem from './elements/CartItem.vue';
+
 export default {
   name: 'DropCart',
+  components: { CartItem },
+  computed: {
+    ...mapState(['cart']),
+    img() {
+      return `/img/cat/${this.good.id}.png`;
+    },
+  },
 };
 </script>
 

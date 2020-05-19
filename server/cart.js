@@ -13,7 +13,7 @@ const add = (cart, req) => {
 
 const change = (cart, req) => {
   console.log('cart.change');
-  const find = cart.find(el => el.id_product === +req.params.id);
+  const find = cart.find(el => el.id === +req.params.id);
   find.quantity += req.body.quantity;
   return JSON.stringify(cart, null, 4);
 };

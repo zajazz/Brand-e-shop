@@ -8,7 +8,7 @@
       <Search ref="search"/>
     </div>
     <div class="header__right">
-      <DropCart></DropCart>
+      <CartDrop />
       <a class="button" href="#"><span class="button__text">My Account</span>
         <i class="fas fa-sort-down button__point"></i>
       </a>
@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import DropCart from './CartDrop.vue';
+import CartDrop from './CartDrop.vue';
 import Search from './Search.vue';
 
 export default {
   name: 'Header',
   components: {
     Search,
-    DropCart,
+    CartDrop,
   },
 };
 </script>

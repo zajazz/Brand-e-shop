@@ -1,0 +1,32 @@
+[
+    {
+        "id": 123,
+        "brand": 1,
+        "color": null,
+        "size": null,
+        "price": 52,
+        "shipping": null,
+        "rating": 5,
+        "quantity": 1
+    },
+    {
+        "id": 125,
+        "brand": 3,
+        "color": null,
+        "size": null,
+        "price": 55,
+        "shipping": null,
+        "rating": 5,
+        "quantity": 3
+    },
+    {
+        "id": 124,
+        "brand": 2,
+        "color": null,
+        "size": null,
+        "price": 34,
+        "shipping": null,
+        "rating": 5,
+        "quantity": 3
+    }
+]

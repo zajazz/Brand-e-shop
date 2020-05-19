@@ -50,11 +50,12 @@ export default {
     Footer,
   },
   methods: {
-    ...mapActions(['fetchCategories', 'fetchGoods']),
+    ...mapActions(['fetchCategories', 'fetchGoods', 'fetchCartData']),
   },
   created() {
     this.fetchCategories();
     this.fetchGoods();
+    this.fetchCartData();
   },
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div class="product">
+
     <router-link :to="link"><div class="product__img-bg">
       <img :alt="good.name" class="product__img" :src="img"></div>
     </router-link>
@@ -9,7 +10,7 @@
       <p class="product__price">${{good.price}}.00</p>
     </div>
     <!-- Кнопка Add to cart -->
-    <a class="add_to_cart" @click.prevent="addProduct(good.id)">
+    <a class="add_to_cart" @click.prevent="selectFeatures()">
       <img alt="cart" class="cart_img" src=  "../../assets/img/cart_wh.svg">
       <span class="atc_text">Add to Cart </span>
     </a>
@@ -19,13 +20,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'ProductItem',
   props: ['good'],
   computed: {
-    ...mapState(['brands']),
+    ...mapState(['brands', 'cart']),
     brand() {
       return this.brands.find((item) => item.id === this.good.brand).brand;
     },
@@ -37,9 +38,31 @@ export default {
     },
   },
   methods: {
-    addProduct() {
-      console.log(`add ${this.good.id}`);
-      // TODO: заглушка для метода корзины
+    ...mapActions(['fetchCartData', 'putJson', 'postJson']),
+    selectFeatures() {
+      // TODO: отдельный метод на кнопку корзины, который открывает модальное окно с выбором
+      // количества, цвета и размера, и при подтверждении вызывает метод addProduct(),
+      // передавая ему полученные значения
+      this.addProduct();
+    },
+    addProduct(qty = 1) {
+      /* id && size && color */
+      const find = this.cart.find((el) => el.id === this.good.id);
+      if (find) {
+        this.putJson({ url: '/api/cart', id: find.id, quantity: qty });
+      } else {
+        let prod = {
+          id: this.good.id,
+          brand: this.good.brand,
+          color: null,
+          size: null,
+          price: this.good.price,
+          shipping: null,
+          rating: this.good.rating,
+          quantity: qty,
+        };
+        this.postJson({ url: '/api/cart', prod });
+      }
     },
   },
 };

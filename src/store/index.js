@@ -14,11 +14,17 @@ export default new Vuex.Store({
     errors: [],
     currentCat: [],
     searchString: '',
+    cart: [],
+    tmp: [],
   },
   mutations: {
     SET_CART_DATA(state, data) {
-      console.log('SET_CART_DATA => ');
+      console.log('SET_CART_DATA => ', data);
       state.cart = [...data];
+    },
+    ADD_TO_CART(state, data) {
+      console.log('ADD_TO_CART => ', data);
+      state.cart.push(data);
     },
     SET_CATEGORIES(state, data) {
       console.log('SET_CATEGORIES => ');
@@ -48,6 +54,9 @@ export default new Vuex.Store({
       console.log('SET_FILTERED => ');
       state.filtered = [...data];
     },
+    TMP(state, data) {
+      state.tmp = [...data];
+    },
   },
   actions: {
     fetchCategories({ commit }) {
@@ -73,7 +82,7 @@ export default new Vuex.Store({
         });
     },
     filterProducts({ commit, state }, sortBy) {
-      console.log('filterProducts ', sortBy);
+      // console.log('filterProducts ');
       if (state.goods.length) {
         let filtered = state.goods.slice();
         if (state.currentCat.length && state.currentCat[0]) {
@@ -98,6 +107,55 @@ export default new Vuex.Store({
         commit('SET_ERROR', { filterProducts: 'Nothing to filter.' });
       }
     },
+    fetchCartData({ commit }) {
+      fetch('/api/cart')
+        .then((result) => result.json())
+        .then((data) => {
+          // console.log('fetchCartData');
+          commit('SET_CART_DATA', data);
+        })
+        .catch((error) => {
+          commit('SET_ERROR', { fetchCartData: error.message });
+        });
+    },
+    putJson({ commit }, dataObj) {
+      console.log('putJson', dataObj); // url, id, qty
+      fetch(`/api/cart/${dataObj.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ quantity: dataObj.quantity })
+      })
+        .then((result) => result.json())
+        .then((data) => {
+          console.log(data);
+          if (data.result === 1) {
+            /* найти в cart товар по id и изменить кол-во (изменить, а не добавить) */
+          }
+          commit('TMP', data);
+          // TODO: эта часть в стор?
+          // find.quantity += 1;
+        })
+        .catch((error) => {
+          commit('SET_ERROR', { putJson: error.message });
+        });
+    },
+    postJson({ commit }, dataObj) {
+      // console.log('postJson', dataObj.prod);
+      return fetch(dataObj.url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dataObj.prod)
+      }).then((result) => result.json())
+        .then((data) => {
+          /* если на сервере добавили, добавляем на фронте */
+          if (data.result === 1) {
+            commit('ADD_TO_CART', dataObj.prod);
+          }
+        })
+        .catch((error) => {
+          commit('SET_ERROR', { postJson: error });
+        });
+    }
   },
   getters: {
     BROWSE_MENU_ITEMS(state) {
