@@ -10,22 +10,24 @@ const add = (cart, req) => {
   return JSON.stringify(cart, null, 4);
 };
 
-
+/**
+ *
+ * @param cart - array from userCart.json
+ * @param req {Object} - req.body.quantity
+ * @return {string} - changed cart
+ */
 const change = (cart, req) => {
-  console.log('cart.change');
+  console.log('cart.change', req.body);
   const find = cart.find(el => el.id === +req.params.id);
-  find.quantity += req.body.quantity;
+  find.quantity = req.body.quantity;
   return JSON.stringify(cart, null, 4);
 };
 
 
 const del = (cart, req) => {
   console.log('cart.del');
-  const find = cart.find(el => el.id_product === +req.params.id);
-  find.quantity -= req.body.quantity;
-  if (find.quantity <= 0) {
-    cart.splice(cart.indexOf(find), 1);
-  }
+  const find = cart.find(el => el.id === +req.params.id);
+  cart.splice(cart.indexOf(find), 1);
   return JSON.stringify(cart, null, 4);
 };
 

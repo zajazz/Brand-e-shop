@@ -5,7 +5,7 @@
       <img :alt="good.name" class="product__img" :src="img"></div>
     </router-link>
     <div class="product__content">
-      <router-link :to="link" class="product__title">{{ good.category }} {{ brand }} {{good.name
+      <router-link :to="link" class="product__title">{{ brand }} {{good.name
         }}</router-link>
       <p class="product__price">${{good.price}}.00</p>
     </div>
@@ -49,10 +49,12 @@ export default {
       /* id && size && color */
       const find = this.cart.find((el) => el.id === this.good.id);
       if (find) {
-        this.putJson({ url: '/api/cart', id: find.id, quantity: qty });
+        const quantity = find.quantity + qty;
+        this.putJson({ url: '/api/cart', id: find.id, quantity });
       } else {
         let prod = {
           id: this.good.id,
+          name: this.good.name,
           brand: this.good.brand,
           color: null,
           size: null,

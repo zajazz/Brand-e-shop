@@ -3,14 +3,13 @@
     <router-link to="cart">
       <img alt="cart" class="header__cart" src="../assets/img/cart_black.svg">
       <!-- Корзина -->
-      {{ cart }}
       <div class="cart__drop">
         <div class="cart__items">
-          <CartItem />
+          <CartItem v-for="cartItem in cart" v-bind:key="cartItem.id" :item="cartItem"/>
         </div>
         <div class="cart__total">
           <div>TOTAL</div>
-          <div>$500.00</div>
+          <div>${{ total }}</div>
         </div>
         <router-link class="cart__checkout" to="checkout">Checkout</router-link>
         <router-link class="cart__gtc" to="cart">Go to cart</router-link>
@@ -31,6 +30,9 @@ export default {
     img() {
       return `/img/cat/${this.good.id}.png`;
     },
+    total() {
+      return this.cart.reduce((acc, cur) => acc + (cur.price * cur.quantity), 0).toFixed(2);
+    }
   },
 };
 </script>
@@ -100,45 +102,4 @@ export default {
     flex-direction: column
     align-items: center
     justify-content: space-between
-  &__item
-    display: flex
-    justify-content: flex-start
-    width: 100%
-    padding-bottom: 16px
-    margin-bottom: 16px
-    border-bottom: 1px solid rgba(237, 237, 237, 0.75)
-    &:hover
-      box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.1)
-    & i, a
-      font-size: 16px
-      color: #c0c0c0
-      align-self: center
-      padding: 0
-      +trans(color, .3s)
-    & i:hover
-      color: #656565
-      transform: scale(1.2)
-    & img
-      margin-right: 14px
-      max-height: 85px
-      max-width: 72px
-    &_desc
-      width: 115px
-      display: flex
-      flex-direction: column
-      justify-content: flex-start
-      padding-right: 14px
-      & i
-        font-size: 12px
-        color: #e4af48
-        padding: 0
-      & p
-        font-size: 12px
-        color: $selectColor
-      & h3 a
-        font-size: 12px
-        font-weight: bold
-        color: $darkColor
-        text-align: left
-        text-transform: uppercase
 </style>

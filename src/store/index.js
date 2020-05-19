@@ -19,12 +19,23 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_CART_DATA(state, data) {
-      console.log('SET_CART_DATA => ', data);
+      console.log('SET_CART_DATA => ');
       state.cart = [...data];
     },
     ADD_TO_CART(state, data) {
-      console.log('ADD_TO_CART => ', data);
+      console.log('ADD_TO_CART => ');
       state.cart.push(data);
+    },
+    UPDATE_CART_DATA(state, data) {
+      console.log('UPDATE_CART_DATA => ');
+      // data: { url, id, quantity }
+      const idx = state.cart.findIndex((el) => el.id === data.id);
+      state.cart[idx].quantity = data.quantity;
+    },
+    DELETE_FROM_CART(state, id) {
+      console.log('DELETE_FROM_CART => ', id);
+      const idx = state.cart.findIndex((el) => el.id === id);
+      state.cart.splice(idx, 1);
     },
     SET_CATEGORIES(state, data) {
       console.log('SET_CATEGORIES => ');
@@ -119,7 +130,6 @@ export default new Vuex.Store({
         });
     },
     putJson({ commit }, dataObj) {
-      console.log('putJson', dataObj); // url, id, qty
       fetch(`/api/cart/${dataObj.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -127,13 +137,9 @@ export default new Vuex.Store({
       })
         .then((result) => result.json())
         .then((data) => {
-          console.log(data);
           if (data.result === 1) {
-            /* найти в cart товар по id и изменить кол-во (изменить, а не добавить) */
+            commit('UPDATE_CART_DATA', dataObj);
           }
-          commit('TMP', data);
-          // TODO: эта часть в стор?
-          // find.quantity += 1;
         })
         .catch((error) => {
           commit('SET_ERROR', { putJson: error.message });
@@ -155,7 +161,24 @@ export default new Vuex.Store({
         .catch((error) => {
           commit('SET_ERROR', { postJson: error });
         });
-    }
+    },
+    deleteJson({ commit }, itemId) {
+      fetch(`/api/cart/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }).then((result) => result.json())
+        .then((data) => {
+          /* если на сервере добавили, добавляем на фронте */
+          if (data.result === 1) {
+            commit('DELETE_FROM_CART', itemId);
+          }
+        })
+        .catch((error) => {
+          commit('SET_ERROR', { deleteJson: error });
+        });
+    },
   },
   getters: {
     BROWSE_MENU_ITEMS(state) {

@@ -35,12 +35,11 @@ router.post('/', (req, res) => {
 // // localhost:3000/api/cart/123 // req.params.id
 // // localhost:3000/api/cart/?var1='sfsf'&var2='ada' // req.query
 router.put('/:id', (req, res) => {
-  console.log(req.body);
   handler(req, res, 'change', projectAddr + '/server/db/userCart.json');
 });
-//
-// router.delete('/:id', (req, res) => {
-//   handler(req, res, 'del', projectAddr + '/server/db/userCart.json');
-// });
+
+router.delete('/:id', (req, res) => {
+  handler(req, res, 'del', projectAddr + '/server/db/userCart.json');
+});
 
 module.exports = router;
