@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import _ from 'underscore';
 
 Vue.use(Vuex);
 
@@ -92,31 +93,60 @@ export default new Vuex.Store({
           commit('SET_ERROR', { fetchGoods: error.message });
         });
     },
-    filterProducts({ commit, state }, sortBy) {
-      // console.log('filterProducts ');
-      if (state.goods.length) {
-        let filtered = state.goods.slice();
-        if (state.currentCat.length && state.currentCat[0]) {
-          const catID = state.currentCat[0];
-          const subcatID = state.currentCat[1];
-          filtered = filtered.filter((el) => el.category === catID);
-          if (subcatID) filtered = filtered.filter((el) => el.subcategory === subcatID);
-        }
-        if (state.searchString) {
-          const regexp = new RegExp(state.searchString, 'i');
-          filtered = filtered.filter((el) => {
-            let brandName = state.brands.find((brand) => brand.id === el.brand).brand;
-            return regexp.test(el.name) || regexp.test(brandName);
-          });
-        }
-        /* Uses for sorting by number-type fields like price, sold, rating */
-        if (sortBy) {
-          filtered = filtered.sort((a, b) => b[sortBy] - a[sortBy]);
-        }
-        commit('SET_FILTERED', filtered);
-      } else {
-        commit('SET_ERROR', { filterProducts: 'Nothing to filter.' });
+    filterProducts({ commit, state }, range = []) {
+
+      if (!state.goods.length) {
+        commit('SET_ERROR', {filterProducts: 'Nothing to filter.'});
       }
+
+      let filtered = state.goods.slice();
+
+      // filter by catalog & subcatalog
+      if (state.currentCat.length && state.currentCat[0]) {
+        const catID = state.currentCat[0];
+        const subcatID = state.currentCat[1];
+        filtered = filtered.filter((el) => el.category === catID);
+        if (subcatID) filtered = filtered.filter((el) => el.subcategory === subcatID);
+      }
+
+      // filter by search string
+      if (state.searchString) {
+        const regexp = new RegExp(state.searchString, 'i');
+        filtered = filtered.filter((el) => {
+          let brandName = state.brands.find((brand) => brand.id === el.brand).brand;
+          return regexp.test(el.name) || regexp.test(brandName);
+        });
+      }
+
+      // filter by price range
+      if (range.length) {
+        filtered = filtered.filter((el) => (el.price >= range[0] && el.price <= range[1]));
+      }
+
+      commit('SET_FILTERED', filtered);
+    },
+    /**
+     * Sort list of filtered products
+     * @param commit
+     * @param state
+     * @param {string} sortBy - number-typed fields like 'price', 'sold', 'rating'
+     * @param {string} order - 'ASC' or 'DESC'
+     */
+    sortProducts({ commit, state }, { sortBy, order }) {
+
+      if (!state.filtered) this.filterProducts([]);
+
+      let filtered = state.filtered.slice();
+
+      if (!(sortBy in filtered[0])) return;
+
+      if (order === 'DESC') {
+        filtered = filtered.sort((a, b) => b[sortBy] - a[sortBy]);
+      } else {
+        filtered = filtered.sort((a, b) => a[sortBy] - b[sortBy]);
+      }
+
+      commit('SET_FILTERED', filtered);
     },
     fetchCartData({ commit }) {
       fetch('/api/cart')
@@ -194,6 +224,12 @@ export default new Vuex.Store({
     PROPS_LIST: (state) => function(type, ids) {
       // console.log('g:PROPS_LIST > ', state);
       return state[type].filter((el) => ids.includes(el.id));
+    },
+    activeCategory({ menuItems, currentCat }) {
+      return menuItems.find((el) => el.id === currentCat[0]);
+    },
+    activeSubCategory({ subcategories, currentCat }) {
+      return subcategories.find((el) => el.id === currentCat[1]);
     },
   },
 });

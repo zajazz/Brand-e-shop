@@ -22,7 +22,7 @@
       </div>
     </div>
     <input class="header__input" placeholder="Search for Item..."
-           type="text" v-model.lazy="searchSrting">
+           type="text" v-model.lazy="searchString">
     <button class="header__search" @submit.prevent="search()">
       <img alt="search" src="../assets/img/search.png">
     </button>
@@ -37,7 +37,7 @@ export default {
   name: 'Search',
   data() {
     return {
-      searchSrting: 'people',
+      searchString: 'people',
     };
   },
   computed: {
@@ -47,7 +47,7 @@ export default {
   methods: {
     ...mapActions(['filterProducts']),
     search() {
-      this.$store.commit('SET_SEARCH_STRING', this.$_.escape(this.searchSrting.trim()));
+      this.$store.commit('SET_SEARCH_STRING', this.$_.escape(this.searchString.trim()));
       this.filterProducts();
     },
     subcatList(ids) {
@@ -66,6 +66,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
+
 .header__form
   display: flex
   align-items: center

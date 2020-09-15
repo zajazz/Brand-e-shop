@@ -3,19 +3,11 @@
     <div class="top-filter__part">
       <p class="filter_caption">Trending now</p>
       <p class="filter_trand">
-        <a href="#">Bohemian</a>
-        &nbsp;|&nbsp;
-        <a href="#" class="trand_activ">Floral</a>
-        &nbsp;|&nbsp;
-        <a href="#">Lace</a>
-      </p>
+        <a href="#">Bohemian</a>&nbsp;|&nbsp;<a href="#" class="trand_activ">Floral</a>&nbsp;|&nbsp;
+        <a href="#">Lace</a></p>
       <p class="filter_trand">
-        <a href="#">Floral</a>
-        &nbsp;|&nbsp;
-        <a href="#">Lace</a>
-        &nbsp;|&nbsp;
-        <a href="#">Bohemian</a>
-      </p>
+        <a href="#">Floral</a>&nbsp;|&nbsp;<a href="#">Lace</a>&nbsp;|&nbsp;
+        <a href="#">Bohemian</a></p>
     </div>
     <div class="top-filter__part">
       <p class="filter_caption">Size</p>
@@ -33,19 +25,67 @@
     </div>
     <div class="top-filter__part">
       <p class="filter_caption">pRICE</p>
-      <input class="range" type="range" value="10" step="0.1">
+      <div id="slider" class="range"></div>
       <div class="price_range">
-        <div>$52</div>
-        <div>$400</div>
+        <div>${{ min }}</div>
+        <div>${{ max }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import noUiSlider from 'nouislider';
+import '../assets/css/nouislider.css';
+import { mapActions, mapState } from 'vuex';
+
+
 export default {
   name: 'CatalogFilter',
+  data() {
+    return {
+      min: 0,
+      max: 0,
+    };
+  },
+  computed: {
+    ...mapState(['filtered']),
+    slider() {
+      return document.getElementById('slider');
+    },
+    maxPrice() {
+      return this.$_.max(this.filtered, (good) => good.price).price;
+    },
+    minPrice() {
+      return this.$_.min(this.filtered, (good) => good.price).price;
+    },
+  },
+  methods: {
+    ...mapActions(['filterProducts']),
+  },
+  mounted() {
+    this.min = this.minPrice;
+    this.max = this.maxPrice;
+
+    // create price range input
+    noUiSlider.create(this.slider, {
+      start: [this.min, this.max],
+      connect: true,
+      range: {
+        min: this.minPrice,
+        max: this.maxPrice,
+      }
+    });
+
+    // assign handler for range input
+    this.slider.noUiSlider.on('set', (range) => {
+      this.min = parseInt(range[0], 10);
+      this.max = parseInt(range[1], 10);
+      this.filterProducts(range);
+    });
+  },
 };
+
 </script>
 
 <style lang="sass">
@@ -121,9 +161,10 @@ export default {
 
 .range
   width: 262px
-  background-color: #f0f0f0
+
 
 .price_range
+  padding-top: 17px;
   width: 262px
   display: flex
   justify-content: space-between

@@ -36,7 +36,7 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 .bottom_discount
   height: 341px
   background-color: #222224

@@ -12,52 +12,15 @@
         <span>ACTION</span>
       </div>
     </div>
-    <CartRow></CartRow>
-    <div class="table_row">
-      <div class="table_left">
-        <a href="/single.html">
-          <img src="../assets/img/cat/cart2.png" alt="Mango People T-shirt" class="table_img"></a>
-        <div class="table_desc">
-          <h3><a href="/single.html">Mango People T-shirt</a></h3>
-          <div class="table_product_specs">
-            <p><b>Color:</b> Red</p>
-            <p><b>Size:</b> XXL</p>
-          </div>
-        </div>
-      </div>
-      <div class="table_right table_spec">
-        <span>150$</span>
-        <span><input type="number" required min="1" value="2"></span>
-        <span>FREE</span>
-        <span>300$</span>
-        <span><i class="fas fa-times-circle"></i></span>
-      </div>
-    </div>
-    <div class="table_row">
-      <div class="table_left">
-        <a href="#">
-          <img src="../assets/img/cat/cart3.png" alt="Mango People T-shirt" class="table_img"></a>
-        <div class="table_desc">
-          <h3><a href="#">Mango People T-shirt</a></h3>
-          <div class="table_product_specs">
-            <p><b>Color:</b> Red</p>
-            <p><b>Size:</b> XXL</p>
-          </div>
-        </div>
-      </div>
-      <div class="table_right table_spec">
-        <span>150$</span>
-        <span><input type="number" required min="1" value="2"></span>
-        <span>FREE</span>
-        <span>300$</span>
-        <span><i class="fas fa-times-circle"></i></span>
-      </div>
-    </div>
+    <CartRow v-for="cartItem in cart" v-bind:key="cartItem.id" :item="cartItem"/>
+
+    <div v-if="!(cart.length)" class="table_row color">
+      <span>Cart is empty. Buy something.</span></div>
     <div class="table_row table_buttons">
-      <button>cLEAR SHOPPING CART</button>
-      <button>cONTINUE sHOPPING</button>
+      <button v-if="cart.length" class="cart__btn" @click="clearCart()">CLEAR SHOPPING CART</button>
+      <button class="cart__btn"><router-link to="/catalog">CONTINUE SHOPPING</router-link></button>
     </div>
-    <div class="table_row table_service">
+    <div v-if="cart.length" class="table_row table_service">
       <div class="service_div">
         <h3>Shipping Address</h3>
         <select class="country" >
@@ -77,8 +40,8 @@
         <button>Apply coupon</button>
       </div>
       <div class="table_total">
-        <p>Sub total <span>$900</span></p>
-        <h3>GRAND TOTAL <span class="color">$900</span></h3>
+        <p>Sub total <span>${{ total }}</span></p>
+        <h3>GRAND TOTAL <span class="color">${{ total }}</span></h3>
         <div class="line"></div>
         <router-link to="/checkout"><button>proceed to checkout</button></router-link>
       </div>
@@ -89,8 +52,9 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import Breadcrumb from '../components/Breadcrumb.vue';
-import CartRow from '../components/CartRow.vue';
+import CartRow from '../components/elements/CartRow.vue';
 
 export default {
   name: 'Cart',
@@ -98,6 +62,24 @@ export default {
     CartRow,
     Breadcrumb,
   },
+  computed: {
+    ...mapState(['cart']),
+    img() {
+      return `/img/cat/${this.good.id}.png`;
+    },
+    total() {
+      return this.cart.reduce((acc, cur) => acc + (cur.price * cur.quantity), 0).toFixed(2);
+    }
+  },
+  methods: {
+    ...mapActions(['deleteJson']),
+    clearCart() {
+      // TODO modal confirmation
+      this.cart.forEach((value) => {
+        this.deleteJson(value.id);
+      });
+    },
+  }
 };
 </script>
 
@@ -129,6 +111,8 @@ export default {
       +trans(all, .3s)
       &:hover
         background-color: #b2b2b2
+      & a
+        color: #4a4a4a
   &_service
     margin-top: 38px
     margin-bottom: -45px !important
@@ -208,4 +192,5 @@ export default {
   @extend .service_input
   display: block
   position: relative
+
 </style>

@@ -3,21 +3,34 @@
     <div class="category">New Arrivals</div>
     <nav>
       <router-link to="/" class="breadcrumb__line" >Home</router-link>
-      &nbsp;/&nbsp;
-      <router-link to="/catalog/:id" class="breadcrumb__line">Men</router-link>
-      &nbsp;/&nbsp;
-      <span class="breadcrumb__activ">New Arrivals</span>
+
+<!--      <p v-for="(route, i) in $route.matched" v-bind:key="i">{{ route.path }}</p>-->
+      <BreadcrumbItem v-for="(route, i) in $route.matched" :route="route" v-bind:key="i">
+      </BreadcrumbItem>
+
     </nav>
   </div>
 </template>
 
 <script>
+import BreadcrumbItem from './elements/BreadcrumbItem.vue';
+
 export default {
   name: 'Breadcrumb',
+  components: { BreadcrumbItem },
+  methods: {
+  },
+  computed: {
+  },
+  mounted() {
+    console.log(this);
+  }
 };
+
+
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 .category
   font-size: 24px
   font-weight: 900
@@ -44,4 +57,6 @@ export default {
     color: $selectColor
     text-transform: uppercase
     font-size: 14px
+
+
 </style>

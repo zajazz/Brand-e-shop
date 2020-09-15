@@ -1,30 +1,53 @@
 <template>
   <div class="table_row">
     <div class="table_left">
-      <router-link to="/product">
-        <img src="../assets/img/cat/cart1.png" alt="Mango People T-shirt" class="table_img">
+      <router-link :to="link">
+        <img :src="img" :alt="item.name" class="table_img">
       </router-link>
       <div class="table_desc">
-        <h3><router-link to="/product">Mango People T-shirt</router-link></h3>
+        <h3><router-link :to="link">{{ item.name }}</router-link></h3>
         <div class="table_product_specs">
-          <p><b>Color:</b> Red</p>
-          <p><b>Size:</b> XXL</p>
+          <p><b>Color: </b>{{ item.color }}</p>
+          <p><b>Size: </b>{{ item.size }}</p>
         </div>
       </div>
     </div>
     <div class="table_right table_spec">
-      <span>150$</span>
-      <span><input type="number" required min="1" value="2"></span>
-      <span>FREE</span>
-      <span>300$</span>
-      <span><i class="fas fa-times-circle"></i></span>
+      <span>{{ item.price }}$</span>
+      <span>
+        <input type="number" required min="1" :value="item.quantity"
+               @change="changeQty($event, item)">
+      </span>
+      <span>{{ item.shipping || 'FREE'}}</span>
+      <span>{{ item.price * item.quantity }}$</span>
+      <span><a @click.prevent="remove()"><i class="fas fa-times-circle"></i></a></span>
     </div>
   </div>
 </template>
 
 <script>
+import {mapActions} from 'vuex';
+
 export default {
   name: 'CartRow',
+  props: ['item'],
+  computed: {
+    link() {
+      return { name: 'Product', params: { id: this.item.id } };
+    },
+    img() {
+      return `/img/cat/${this.item.id}.png`;
+    },
+  },
+  methods: {
+    ...mapActions(['putJson', 'deleteJson']),
+    remove() {
+      this.deleteJson(this.item.id);
+    },
+    changeQty($event, item) {
+      this.putJson({ url: '/api/cart', id: item.id, quantity: $event.target.value });
+    }
+  },
 };
 </script>
 

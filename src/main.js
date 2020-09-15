@@ -15,7 +15,7 @@ new Vue({
   },
   methods: {
   },
-  updated() {
+  mounted() {
     console.log(this);
   },
   render: (h) => h(App),

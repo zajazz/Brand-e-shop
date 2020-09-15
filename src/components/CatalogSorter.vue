@@ -6,11 +6,11 @@
         <i class="fas fa-sort-down sort__point"></i>
         <div class="sort_drop sort_by">
           <ul class="sort_ul">
-            <li class="sort_list">Default</li>
-            <li class="sort_list">Name</li>
-            <li class="sort_list">Price (asc)</li>
-            <li class="sort_list">Price (desc)</li>
-            <li class="sort_list">Rating</li>
+            <li class="sort_list" @click="sortBy()">Default</li>
+            <li class="sort_list" @click="sortBy('name')">Name</li>
+            <li class="sort_list" @click="sortBy('price', 'ASC')">Price (asc)</li>
+            <li class="sort_list" @click="sortBy('price', 'DESC')">Price (desc)</li>
+            <li class="sort_list" @click="sortBy('rating')">Rating</li>
           </ul>
         </div>
       </div>
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: 'Sorter',
+  name: 'CatalogSorter',
 };
 </script>
 

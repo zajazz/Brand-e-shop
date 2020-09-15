@@ -5,7 +5,7 @@
       <NavLeft></NavLeft>
       <div class="main__right">
         <CatalogFilter></CatalogFilter>
-        <Sorter></Sorter>
+        <CatalogSorter></CatalogSorter>
         <ProductBox :qty="qty"></ProductBox>
         <Paging></Paging>
       </div>
@@ -20,7 +20,7 @@ import Discount from '../components/Discount.vue';
 import Paging from '../components/Paging.vue';
 import NavLeft from '../components/NavLeft.vue';
 import CatalogFilter from '../components/CatalogFilter.vue';
-import Sorter from '../components/Sorter.vue';
+import CatalogSorter from '../components/CatalogSorter.vue';
 import ProductBox from '../components/ProductBox.vue';
 
 export default {
@@ -39,7 +39,7 @@ export default {
   },
   components: {
     ProductBox,
-    Sorter,
+    CatalogSorter,
     CatalogFilter,
     NavLeft,
     Paging,

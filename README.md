@@ -10,6 +10,11 @@ yarn install
 yarn serve
 ```
 
+### Start backend server
+```
+nodemon server/server
+```
+
 ### Compiles and minifies for production
 ```
 yarn build

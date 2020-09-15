@@ -7,12 +7,12 @@
     <h4 class="title__h4">Featured Items</h4>
     <p class="subtitle">Shop for items based on what we featured in this week</p>
   </div>
-  <ProductBox :qty="8"/>
+  <ProductBox :qty="8" :sortBy="sortBy" :order="order"/>
   <div class="action center">
-    <a class="action__button" href="/product.html">
+    <router-link class="action__button" :to="{ name: 'Catalog' }">
       <span class="action_button__text">Browse All Product</span>
       <img alt="my account" class="action_button__point" src="../assets/img/arrow_right.png">
-    </a>
+    </router-link>
 
   </div>
 </section>
@@ -33,6 +33,13 @@ export default {
     Special,
     Offer,
     Promo,
+  },
+  data() {
+    return {
+      qty: 8,
+      sortBy: 'sold',
+      order: 'DESC',
+    };
   },
 };
 </script>

@@ -18,9 +18,9 @@
           <a href="#">
             <p class="desc__title">Free Delivery</p>
           </a>
-          <a class="desc__text" href="#">
+          <p class="desc__text2" href="#">
             Worldwide delivery on all. Authorit tively morph next-generation innov
-            tion with extensive models.</a>
+            tion with extensive models.</p>
         </div>
       </article>
       <article class="desc__item">
@@ -109,13 +109,13 @@ export default {
     letter-spacing: 0.03em
     padding-top: 7px
     padding-bottom: 17px
-  &__text
+.desc__text
     font-size: 14px
     font-weight: 300
     color: #fbfbfb
     letter-spacing: 0.03em
     line-height: 24px
-  &_content
+.desc_content
     display: flex
     flex-direction: column
     justify-content: flex-start

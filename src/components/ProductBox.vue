@@ -16,7 +16,7 @@ export default {
   components: {
     ProductItem,
   },
-  props: ['featured', 'qty'],
+  props: ['sortBy', 'qty', 'order'],
   computed: {
     ...mapState(['filtered']),
     productList() {
@@ -24,11 +24,15 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['filterProducts']),
+    ...mapActions(['sortProducts']),
   },
-  mounted() {
-    const param = this.featured ? 'sold' : null;
-    this.filterProducts(param);
+  created() {
+    if (this.sortBy) {
+      this.sortProducts({
+        sortBy: this.sortBy,
+        order: this.order,
+      });
+    }
   },
 };
 </script>

@@ -41,7 +41,7 @@ app.get('*', (req, res) => {
   // отправить файл index.html
   res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
 });
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Server started at port ${port}`));
 
 // // const cartRouter = require('./cartRouter');
