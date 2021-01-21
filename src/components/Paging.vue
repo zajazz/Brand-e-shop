@@ -12,7 +12,7 @@
       <a href="#" class="number">20</a>
       <a href="#" class="number"><i class="fas fa-angle-right"></i></a>
     </div>
-    <a class="viewall" href="/product.html">View All</a>
+    <router-link :to="{name: 'Catalog'}" class="viewall">View All</router-link>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 
 .paging
   display: flex

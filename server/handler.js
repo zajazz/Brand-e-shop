@@ -12,14 +12,13 @@ const handler = (req, res, action, file) => {
     if (err) {
       res.sendStatus(404, JSON.stringify({result: 0, text: `Handler readFile error (${err})`}));
     }
-    // если корзина пуста
+    // empty cart
     if (!data) {
-        data = JSON.stringify([]);
+      data = JSON.stringify([]);
     }
-    const newCart = actions[action](JSON.parse(data), req); //data: содержимое корзины
+    const newCart = actions[action](JSON.parse(data), req);
     fs.writeFile(file, newCart, (err) => {
       if (err) {
-        console.log('Ошибка записи в файл');
         res.send('{"result": 0}');
       } else {
         res.send('{"result": 1}');

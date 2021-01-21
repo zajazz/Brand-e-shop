@@ -1,20 +1,20 @@
 <template>
   <section class="product-box product_align center">
-    <div></div>
-    <br>
+    <Popup ref="popup">Item added to cart</Popup>
     <ProductItem v-for="good in productList" v-bind:key="good.id" :good="good" />
-
   </section>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import ProductItem from './elements/ProductItem.vue';
+import Popup from '@/components/popup/Popup.vue';
+import ProductItem from '@/components/elements/ProductItem.vue';
 
 export default {
   name: 'ProductBox',
   components: {
     ProductItem,
+    Popup,
   },
   props: ['sortBy', 'qty', 'order'],
   computed: {
@@ -25,6 +25,9 @@ export default {
   },
   methods: {
     ...mapActions(['sortProducts']),
+    showPopup(time) {
+      this.$refs.popup.showPopup(time);
+    },
   },
   created() {
     if (this.sortBy) {

@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 .offer
   margin-top: 98px
   height: 823px

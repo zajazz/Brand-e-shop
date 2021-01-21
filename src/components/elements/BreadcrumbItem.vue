@@ -1,14 +1,14 @@
 <template>
-<span>
+<span v-if="route.name">
   &nbsp;/
-<!-- обычная ссылка -->
+<!-- regular link -->
     <router-link v-if="!route.meta.bcDynamic" :to="{name: route.name}" class="breadcrumb__line">
       {{route.meta.bcLinkText}}
     </router-link>
 
-<!-- динамическая ссылка -->
+<!-- dynamic link -->
     <router-link v-if="route.meta.bcDynamic"
-                 :to= "{name: route.name, params: {id: $route.params.id}}">
+                 :to= "{name: route.name, params: {id: $route.params.id}}" class="breadcrumb__line">
       <template v-if="value">
         {{ formattedValue }}
       </template>
@@ -40,10 +40,11 @@ export default {
       const loadingText = this.route.meta.bcLoadingText;
       return loadingText || 'Loading...';
     }
-  }
+  },
+
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 
 </style>

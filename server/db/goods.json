@@ -2,9 +2,9 @@
     {
         "id": 123,
         "category": 2,
-        "subcategory": 1,
+        "subcategory": 13,
         "brand": 1,
-        "name": "PEOPLE Dress",
+        "name": "Marina Club Man's t-shirt",
         "price": 52,
         "sold": 0,
         "hotdeal": 0,
@@ -31,10 +31,10 @@
     {
         "id": 124,
         "category": 3,
-        "subcategory": 2,
+        "subcategory": 1,
         "brand": 2,
-        "name": "PEOPLE sweater",
-        "price": 34,
+        "name": "PEOPLE black dress",
+        "price": 134,
         "sold": 1,
         "hotdeal": 1,
         "rating": 5,
@@ -47,9 +47,7 @@
             6
         ],
         "colors": [
-            1,
-            2,
-            4
+            3
         ],
         "materials": [
             2
@@ -58,10 +56,10 @@
     {
         "id": 125,
         "category": 4,
-        "subcategory": 0,
+        "subcategory": 13,
         "brand": 3,
         "name": "boy's t-shirt",
-        "price": 55,
+        "price": 35,
         "sold": 1,
         "hotdeal": 0,
         "rating": 5,
@@ -71,7 +69,7 @@
             1
         ],
         "colors": [
-            2
+            1
         ],
         "materials": [
             1
@@ -80,9 +78,9 @@
     {
         "id": 126,
         "category": 5,
-        "subcategory": 0,
+        "subcategory": 15,
         "brand": 4,
-        "name": "summer bag",
+        "name": "little summer bag",
         "price": 43,
         "sold": 1,
         "hotdeal": 0,
@@ -90,9 +88,7 @@
         "description": "Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
         "designer": 1,
         "sizes": [
-            2,
-            3,
-            4
+            1
         ],
         "colors": [
             2,
@@ -104,15 +100,15 @@
     },
     {
         "id": 127,
-        "category": 2,
-        "subcategory": 3,
+        "category": 3,
+        "subcategory": 2,
         "brand": 5,
-        "name": "asymmetrical t-shirt",
+        "name": "asymmetrical sweater",
         "price": 12,
         "sold": 1,
         "hotdeal": 1,
         "rating": 5,
-        "description": "Progressively syndicate collaborative architectures before cutting-edge services.",
+        "description": "Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.",
         "designer": 2,
         "sizes": [
             2,
@@ -132,9 +128,9 @@
     {
         "id": 128,
         "category": 3,
-        "subcategory": 4,
+        "subcategory": 3,
         "brand": 6,
-        "name": "PEOPLE skirt",
+        "name": "PEOPLE lacy top",
         "price": 22,
         "sold": 0,
         "hotdeal": 0,
@@ -156,11 +152,11 @@
     },
     {
         "id": 129,
-        "category": 4,
-        "subcategory": 0,
+        "category": 2,
+        "subcategory": 5,
         "brand": 1,
-        "name": "warm dress",
-        "price": 55,
+        "name": "warm zipper jacket",
+        "price": 155,
         "sold": 0,
         "hotdeal": 0,
         "rating": 4,
@@ -174,15 +170,16 @@
             4
         ],
         "materials": [
-            1
+            1,
+            5
         ]
     },
     {
         "id": 130,
-        "category": 5,
-        "subcategory": 0,
+        "category": 3,
+        "subcategory": 1,
         "brand": 2,
-        "name": "metal buckle belt",
+        "name": "light flower print dress",
         "price": 105,
         "sold": 10,
         "hotdeal": 1,
@@ -196,15 +193,15 @@
             4
         ],
         "materials": [
-            4
+            5
         ]
     },
     {
         "id": 131,
-        "category": 2,
-        "subcategory": 5,
+        "category": 3,
+        "subcategory": 3,
         "brand": 3,
-        "name": "PEOPLE jacket",
+        "name": "light cashmere top",
         "price": 112,
         "sold": 0,
         "hotdeal": 1,
@@ -223,15 +220,115 @@
             3
         ],
         "materials": [
-            4
+            2
         ]
     },
     {
         "id": 132,
         "category": 3,
-        "subcategory": 6,
+        "subcategory": 1,
+        "brand": 4,
+        "name": "old-fashion dress",
+        "price": 55,
+        "sold": 0,
+        "hotdeal": 0,
+        "rating": 3,
+        "description": "Completely visualize parallel core competencies rather than exceptional portals.",
+        "designer": 1,
+        "sizes": [
+            2,
+            4
+        ],
+        "colors": [
+            2,
+            3
+        ],
+        "materials": [
+            1,
+            3
+        ]
+    },
+    {
+        "id": 133,
+        "category": 2,
+        "subcategory": 5,
         "brand": 4,
         "name": "old-fashion blazer",
+        "price": 61,
+        "sold": 0,
+        "hotdeal": 0,
+        "rating": 3,
+        "description": "Completely visualize parallel core competencies rather than exceptional portals.",
+        "designer": 1,
+        "sizes": [
+            2,
+            4
+        ],
+        "colors": [
+            2,
+            3
+        ],
+        "materials": [
+            1,
+            3
+        ]
+    },
+    {
+        "id": 134,
+        "category": 2,
+        "subcategory": 8,
+        "brand": 4,
+        "name": "mid-calf length pants",
+        "price": 78,
+        "sold": 0,
+        "hotdeal": 0,
+        "rating": 3,
+        "description": "Completely visualize parallel core competencies rather than exceptional portals.",
+        "designer": 1,
+        "sizes": [
+            2,
+            4
+        ],
+        "colors": [
+            2,
+            3
+        ],
+        "materials": [
+            1,
+            3
+        ]
+    },
+    {
+        "id": 135,
+        "category": 2,
+        "subcategory": 9,
+        "brand": 4,
+        "name": "geometry print oversize hoodie",
+        "price": 198,
+        "sold": 0,
+        "hotdeal": 0,
+        "rating": 3,
+        "description": "Completely visualize parallel core competencies rather than exceptional portals.",
+        "designer": 1,
+        "sizes": [
+            2,
+            4
+        ],
+        "colors": [
+            2,
+            3
+        ],
+        "materials": [
+            1,
+            3
+        ]
+    },
+    {
+        "id": 136,
+        "category": 4,
+        "subcategory": 9,
+        "brand": 4,
+        "name": "kids loose-cut hoodie",
         "price": 98,
         "sold": 0,
         "hotdeal": 0,

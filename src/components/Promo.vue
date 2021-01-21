@@ -13,7 +13,7 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 .promo
   height: 613px
   background-color: #e8e8e8

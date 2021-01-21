@@ -63,6 +63,18 @@ export default {
   align-items: center
   margin-top: 65px
 
-/* .desc__title, */
-/* .desc__text defined in Special component  */
+.desc__title
+  display: block
+  font-size: 20px
+  font-weight: bold
+  color: #fbfbfb
+  letter-spacing: 0.03em
+  padding-top: 7px
+  padding-bottom: 17px
+.desc__text
+  font-size: 14px
+  font-weight: 300
+  color: #fbfbfb
+  letter-spacing: 0.03em
+  line-height: 24px
 </style>

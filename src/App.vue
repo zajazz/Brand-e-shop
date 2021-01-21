@@ -1,17 +1,15 @@
 <template>
   <div id="app">
-    <!-- Ошибки -->
-    <div v-if="errors.length">{{ errors }}</div>
-    <!-- Шапка -->
+    <div v-if="!isInfo" class="project-info-badge" @click="$router.push({ name: 'Info' })">
+      Project info
+    </div>
     <Header ref="Header" />
     <Navigation ref="Navigation"/>
-    <!-- /Шапка -->
+
     <router-view/>
 
-    <!-- Подвал -->
-    <Subscribe />
+    <Subscribe v-if="!isInfo"/>
     <Footer />
-    <!-- /Подвал -->
 
   </div>
 </template>
@@ -27,16 +25,18 @@ export default {
   name: 'Home',
   computed: {
     ...mapState(['errors']),
+    isInfo() {
+      return this.$route.name === 'Info';
+    }
   },
   watch: {
     $route(to, from) {
       const regExp = /\/catalog*/i;
-
-      // перешли в каталог - отфильтровали товары
+      // filter products after category was changed
       if (regExp.test(to.path)) {
         this.$store.commit('SET_CURRENT_CAT', to.params);
         this.$store.dispatch('filterProducts');
-      // вышли из каталога - обнуляем фильтр
+      // clear filter after exit catalog page
       } else if (regExp.test(from.path)) {
         this.$store.commit('SET_CURRENT_CAT', 0);
         this.$store.dispatch('filterProducts');
@@ -61,9 +61,6 @@ export default {
 </script>
 
 <style lang="sass">
-/*a
-  &.router-link-exact-active
-    color: #42b983 */
 *
   margin: 0
   padding: 0
@@ -77,6 +74,35 @@ a
   text-decoration: none
   outline: none
   transition: all .3s
+
+.project-info-badge
+  position: fixed
+  height: 80px
+  width: 80px
+  z-index: 100
+  left: 1vw
+  top: 40vh
+  border-radius: 50%
+  background-color: #999999
+  padding: 20px 10px
+  text-align: center
+  vertical-align: middle
+  color: #fff
+  cursor: pointer
+  &:after
+    content: ''
+    position: absolute
+    height: 18px
+    width: 18px
+    z-index: 100
+    left: 65px
+    top: 0
+    border-radius: 50%
+    background-color: #f16d7f
+    border: 2px solid #fff
+  &:hover
+    background-color: #B8B8B8
+
 
 input
   &:active, &:focus
@@ -104,7 +130,7 @@ details[open] > summary
 .center
   padding: 0 calc(50% - 570px)
 
-/* .color defined in _mixins */
+/*! '.color' defined in _mixins */
 
 .transition
   transition: all 3.3s

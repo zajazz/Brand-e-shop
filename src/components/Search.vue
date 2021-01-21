@@ -3,7 +3,7 @@
     <div class="browse">
       <a class="browse__text" href="#">Browse</a>
       <i class="fas fa-sort-down browse__point"></i>
-      <!-- Выпадающее меню -->
+      <!-- dropdown menu -->
       <div class="drop browse_drop">
         <div class="drop__chapter">
           <span v-for="item of BROWSE_MENU_ITEMS" v-bind:key="item.id">
@@ -37,7 +37,7 @@ export default {
   name: 'Search',
   data() {
     return {
-      searchString: 'people',
+      searchString: '',
     };
   },
   computed: {
@@ -57,15 +57,12 @@ export default {
       let sid = '';
       if (subId) sid = subId;
       return `/catalog/${catId}/${sid}`;
-      // const subIdStr = subId ? `/${subId}` : '';
-      // return { path: `/catalog/${id}${subIdStr}` };
-      // return { name: 'Catalog', params: { id: catId, subid: sid } };
     },
   },
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 
 .header__form
   display: flex

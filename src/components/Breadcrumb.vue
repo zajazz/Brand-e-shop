@@ -1,30 +1,23 @@
 <template>
   <div class="breadcrumb center">
-    <div class="category">New Arrivals</div>
+    <div class="category">{{ activeCategory.name }}</div>
     <nav>
       <router-link to="/" class="breadcrumb__line" >Home</router-link>
-
-<!--      <p v-for="(route, i) in $route.matched" v-bind:key="i">{{ route.path }}</p>-->
-      <BreadcrumbItem v-for="(route, i) in $route.matched" :route="route" v-bind:key="i">
-      </BreadcrumbItem>
-
+      <BreadcrumbItem v-for="(route, i) in $route.matched" :route="route" v-bind:key="i" />
     </nav>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import BreadcrumbItem from './elements/BreadcrumbItem.vue';
 
 export default {
   name: 'Breadcrumb',
   components: { BreadcrumbItem },
-  methods: {
-  },
   computed: {
+    ...mapGetters(['activeCategory']),
   },
-  mounted() {
-    console.log(this);
-  }
 };
 
 

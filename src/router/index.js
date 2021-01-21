@@ -13,6 +13,11 @@ const routes = [
     },
   },
   {
+    path: '/info',
+    name: 'Info',
+    component: () => import('@/pages/Info.vue'),
+  },
+  {
     path: '/cart',
     name: 'Cart',
     component: () => import('../pages/Cart.vue'),
@@ -43,9 +48,9 @@ const routes = [
         component: () => import('../pages/Catalog.vue'),
         meta: {
           bcDynamic: true,
-          bcGetter: 'activeCategory', // <breadcrumb> will use this getter to get the user from vuex
-          bcLinkText: (cat) => cat.name, // once we have the user, we use this function to
-          bcLoadingText: 'Loading Username...' // This will be shown while Data is loading
+          bcGetter: 'activeCategory', // <breadcrumb> will use this getter to get current category from vuex
+          bcLinkText: (cat) => cat.name, // link text
+          bcLoadingText: '...' // This will be shown while data is loading
         },
         children: [
           {
@@ -53,9 +58,9 @@ const routes = [
             component: () => import('../pages/Catalog.vue'),
             meta: {
               bcDynamic: true,
-              bcGetter: 'activeSubCategory', // <breadcrumb> will use this getter to get the user
-              bcLinkText: (subcat) => subcat.name, // once we have the user, we use this function to
-              bcLoadingText: 'Loading Username...' // This will be shown while Data is loading
+              bcGetter: 'activeSubCategory',
+              bcLinkText: (subcat) => subcat.name,
+              bcLoadingText: '...'
             },
           },
         ],
@@ -65,6 +70,7 @@ const routes = [
   {
     path: '/product/:id',
     name: 'Product',
+    props: true, // Pass route.params to props
     component: () => import('../pages/Product.vue'),
   },
 ];

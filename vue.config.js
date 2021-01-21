@@ -8,9 +8,7 @@ module.exports = {
       entry: 'src/main.js',
       template: 'public/index.html',
       filename: 'index.html',
-      title: 'The BRAND of Luxerious Fasion',
-      // chunks to include on this page, by default includes
-      // extracted common chunks and vendor chunks.
+      title: 'The BRAND of Luxerious Fashion',
       chunks: ['chunk-vendors', 'chunk-common', 'index'],
     },
   },

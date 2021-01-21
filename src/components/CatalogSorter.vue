@@ -37,7 +37,7 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 
 .sort
   background-color: #f3f3f3

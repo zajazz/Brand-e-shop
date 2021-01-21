@@ -3,24 +3,21 @@
     <section>
       <div class="gallery">
         <div class="gallery_nav"><i class="fas fa-chevron-left"></i></div>
-        <div class="photo"><img src="../assets/img/cat/full_1.png" alt=""></div>
+        <div class="photo">
+          <img :src="img" :alt="good.name"></div>
         <div class="gallery_nav"><i class="fas fa-chevron-right"></i></div>
       </div>
       <div class="info_top"></div>
       <div class="info">
-        <h3>WOMEN COLLECTION</h3>
+        <h3>{{ category }} COLLECTION</h3>
         <div class="underline"><div></div></div>
-        <h2>Moschino Cheap And Chic</h2>
-        <p class="description">
-          Compellingly actualize fully researched processes before proactive outsourcing.
-          Progressively syndicate collaborative architectures before cutting-edge services.
-          Completely visualize parallel core competencies rather than exceptional portals.
-        </p>
+        <h2>{{ brand }} {{ good.name }}</h2>
+        <p class="description">{{ good.description }}</p>
         <div class="addinfo">
-          <div>MATERIAL: <span>COTTON</span></div>
-          <div>DESIGNER: <span>BINBURHAN</span></div>
+          <div>MATERIAL: <span>{{ materials }}</span></div>
+          <div>DESIGNER: <span>{{ designer }}</span></div>
         </div>
-        <p class="single_price">$561</p>
+        <p class="single_price">${{ good.price }}</p>
         <div class="choose">
           <div class="choose_tip">
             <h3>CHOOSE COLOR</h3>
@@ -56,37 +53,74 @@
           <div class="choose_tip">
             <h3>QUANTITY</h3>
             <input name="quantity" type="number"
-                   required min="1" max="5" class="choose_box" value="1" >
+                   required min="1" max="5" class="choose_box" v-model="qty">
           </div>
         </div>
-        <button class="single_atc">
+        <button class="single_atc" @click.prevent="addProduct">
           <img src="../assets/img/cart_pink.svg" alt="Add to Cart">Add to Cart</button>
       </div>
     </section>
     <section class="alsolike center">
-      <h3>you may like also</h3>
+      <h3>You may like also</h3>
       <ProductBox :featured="featured" :qty="4"></ProductBox>
     </section>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+import router from '@/router/index';
 import ProductBox from '../components/ProductBox.vue';
+
 
 export default {
   name: 'Product',
+  props: ['id'],
   data() {
     return {
       featured: true,
+      qty: 1,
     };
   },
   components: {
     ProductBox,
   },
+  methods: {
+    ...mapActions(['addToCart']),
+    addProduct() {
+      this.addToCart({ good: this.good, qty: +this.qty });
+    },
+  },
+  computed: {
+    ...mapGetters(['productById', 'PropertyById', 'PROPS_LIST']),
+    good() {
+      return this.productById(this.id);
+    },
+    category() {
+      return this.PropertyById('menuItems', this.good.category).name;
+    },
+    brand() {
+      return this.PropertyById('brands', this.good.brand).brand;
+    },
+    materials() {
+      return this.PROPS_LIST('materials', this.good.materials)
+        .reduce((result, el) => `${result + el.material}, `, '')
+        .slice(0, -2);
+    },
+    designer() {
+      return this.PropertyById('designers', this.good.designer).name;
+    },
+    img() {
+      /* Uncomment the line below when there are appropriate large-size images for products */
+      // return `/img/cat/full/full_${this.good.id}.png`;
+      /* Temporary decision to show initial design concept */
+      return '/img/cat/full/full_127.png';
+    },
+  },
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 .alsolike
   height: 453px
   margin: 119px 0 73px
@@ -269,7 +303,6 @@ export default {
     display: none
     z-index: 2
     width: 144px
-  //border-radius: 3px
   &_list
     display: flex
     justify-content: flex-start

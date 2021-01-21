@@ -1,7 +1,7 @@
 <template>
   <div class="subscribe center">
     <div class="subscribe_left">
-      <img alt="" class="feedback__img" src="src/assets/img/feedback.png">
+      <img alt="" class="feedback__img" src="../assets/img/feedback.png">
       <div class="feedback">
         <p class="feedback-text">
           “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus
@@ -36,7 +36,7 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 .subscribe
   height: 438px
   /* eslint-disable-next-line vue/max-attributes-per-line */

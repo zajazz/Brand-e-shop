@@ -2,43 +2,62 @@
   <aside class="main__left">
     <details class="leftmenu_block" open>
       <summary class="leftmenu_cat">Category</summary>
-      <p><a class="leftmenu__item" href="/product.html">Accessories</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Bags</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Denim</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Hoodies & Sweatshirts</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Jackets & Coats</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Pants</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Polos</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Shirts</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Shoes</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Shorts</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Sweaters & Knits</a></p>
-      <p><a class="leftmenu__item" href="/product.html">T-Shirts</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Tanks</a></p>
+      <p v-for="subcategory of subcategories" v-bind:key="subcategory.id"
+         @click="changeSubcategory(subcategory.id)">
+        <a class="leftmenu__item" href="#" @click.prevent>{{ subcategory.name }}</a></p>
+
+      <!--       <router-link class="" :to="link"></router-link>-->
     </details>
+
     <details class="leftmenu_block">
       <summary class="leftmenu_cat">Brand</summary>
-      <p><a class="leftmenu__item" href="/product.html">Mango</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Mango</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Mango</a></p>
+      <p v-for="brand of brands" v-bind:key="brand.id"
+         @click="changeBrand(brand.id)">
+        <a class="leftmenu__item" href="#" @click.prevent>{{ brand.brand }}</a></p>
     </details>
+
     <details class="leftmenu_block">
       <summary class="leftmenu_cat">Designer</summary>
-      <p><a class="leftmenu__item" href="/product.html">Mango</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Mango</a></p>
-      <p><a class="leftmenu__item" href="/product.html">Mango</a></p>
+      <p v-for="designer of designers" v-bind:key="designer.id"
+         @click="changeDesigner(designer.id)">
+        <a class="leftmenu__item" href="#" @click.prevent>{{ designer.name }}</a></p>
     </details>
   </aside>
 </template>
 
 <script>
+import { mapMutations, mapState, mapActions } from 'vuex';
+
 export default {
   name: 'NavLeft',
+  methods: {
+    ...mapMutations(['SET_CURRENT_CAT']),
+    ...mapActions(['filterProducts']),
+    changeSubcategory(subId) {
+      this.setSubcategory(subId);
+      this.filterProducts();
+    },
+    changeBrand(id) {
+      this.filterProducts({brand: id});
+    },
+    changeDesigner(id) {
+      this.filterProducts({designer: id});
+    },
+    setSubcategory(subId) {
+      let catId = this.currentCat[0];
+      this.SET_CURRENT_CAT({
+        id: catId,
+        subid: subId,
+      });
+    },
+  },
+  computed: {
+    ...mapState(['subcategories', 'currentCat', 'brands', 'designers']),
+  },
 };
 </script>
 
-<style scoped lang="sass">
-/* .main__left not defined */
+<style lang="sass">
 /* summary & details defined in App.vue */
 .leftmenu
   &__item

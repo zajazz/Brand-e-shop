@@ -1,27 +1,5 @@
 [
     {
-        "id": 130,
-        "name": "metal buckle belt",
-        "brand": 2,
-        "color": null,
-        "size": null,
-        "price": 105,
-        "shipping": null,
-        "rating": 4.5,
-        "quantity": 1
-    },
-    {
-        "id": 129,
-        "name": "warm dress",
-        "brand": 1,
-        "color": null,
-        "size": null,
-        "price": 55,
-        "shipping": null,
-        "rating": 4,
-        "quantity": 1
-    },
-    {
         "id": 126,
         "name": "summer bag",
         "brand": 4,
@@ -30,17 +8,6 @@
         "price": 43,
         "shipping": null,
         "rating": 5,
-        "quantity": "2"
-    },
-    {
-        "id": 127,
-        "name": "asymmetrical t-shirt",
-        "brand": 5,
-        "color": null,
-        "size": null,
-        "price": 12,
-        "shipping": null,
-        "rating": 5,
-        "quantity": "9"
+        "quantity": 1
     }
 ]

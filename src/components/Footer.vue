@@ -2,7 +2,7 @@
   <footer>
   <div class="footer center">
     <div class="footer_left">
-      <a class="logo" href="/temlate.html">
+      <a class="logo" href="/">
         <img alt="logo" class="logo__img" src="../assets/img/logo.png">
         BRAN<span class="logo__color">D</span>
       </a>
@@ -20,9 +20,9 @@
       <div class="footer-menu">
         <h3 class="footer-menu__caption color">COMPANY</h3>
         <div class="footer-menu__items">
-          <a href="/temlate.html">Home</a>
-          <a href="#">Shop</a>
-          <a href="#">About</a>
+          <a href="/">Home</a>
+          <a href="/catalog">Shop</a>
+          <a href="/info">About</a>
           <a href="#">How It Works</a>
           <a href="#">Contact</a>
         </div>
@@ -40,11 +40,11 @@
       <div class="footer-menu">
         <h3 class="footer-menu__caption color">SHOP CATEGORY</h3>
         <div class="footer-menu__items">
-          <a href="/product.html">Men</a>
-          <a href="/product.html">Women</a>
-          <a href="/product.html">Child</a>
-          <a href="/product.html">Apparel</a>
-          <a href="/product.html">Browse All</a>
+          <router-link :to="{name: 'Category', params: {id: 2}}">Men</router-link>
+          <router-link :to="{name: 'Category', params: {id: 3}}">Women</router-link>
+          <router-link :to="{name: 'Category', params: {id: 4}}">Kids</router-link>
+          <router-link :to="{name: 'Category', params: {id: 5}}">Accessories</router-link>
+          <router-link :to="{name: 'Catalog'}">Browse All</router-link>
         </div>
       </div>
     </nav>
@@ -83,7 +83,7 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 
 .footer
   justify-content: flex-start

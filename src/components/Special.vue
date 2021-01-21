@@ -18,9 +18,9 @@
           <a href="#">
             <p class="desc__title">Free Delivery</p>
           </a>
-          <p class="desc__text2" href="#">
-            Worldwide delivery on all. Authorit tively morph next-generation innov
-            tion with extensive models.</p>
+          <a class="desc__text" href="#">
+            Worldwide delivery on all.
+            Authority morph next-generation innovation with extensive models.</a>
         </div>
       </article>
       <article class="desc__item">
@@ -31,8 +31,8 @@
             <p class="desc__title">Sales & discounts</p>
           </a>
           <a class="desc__text" href="#">
-            Worldwide delivery on all. Authorit tively morph next-generation innov
-            tion with extensive models.</a>
+            Worldwide delivery on all. Authoritatively morph next-generation
+            innovation with extensive models.</a>
         </div>
       </article>
       <article class="desc__item">
@@ -43,8 +43,8 @@
             <p class="desc__title">Quality assurance</p>
           </a>
           <a class="desc__text" href="#">
-            Worldwide delivery on all. Authorit tively morph next-generation innov
-            tion with extensive models.</a>
+            Worldwide delivery on all.
+            Authoritatively morph next-generation innovation with extensive models.</a>
         </div>
       </article>
     </div>
@@ -97,26 +97,28 @@ export default {
     justify-content: flex-start
     align-items: flex-start
     padding-bottom: 19px
-  &_img_box
-    width: 47px
-    height: 40px
-    margin-right: 30px
-  &__title
-    display: block
-    font-size: 20px
-    font-weight: bold
-    color: #fbfbfb
-    letter-spacing: 0.03em
-    padding-top: 7px
-    padding-bottom: 17px
+.desc_img_box
+  width: 47px
+  height: 40px
+  margin-right: 30px
+
+.desc__title
+  display: block
+  font-size: 20px
+  font-weight: bold
+  color: #fbfbfb
+  letter-spacing: 0.03em
+  padding-top: 7px
+  padding-bottom: 17px
 .desc__text
-    font-size: 14px
-    font-weight: 300
-    color: #fbfbfb
-    letter-spacing: 0.03em
-    line-height: 24px
+  font-size: 14px
+  font-weight: 300
+  color: #fbfbfb
+  letter-spacing: 0.03em
+  line-height: 24px
 .desc_content
-    display: flex
-    flex-direction: column
-    justify-content: flex-start
+  padding-left: 10px
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
 </style>

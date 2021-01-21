@@ -19,5 +19,6 @@ module.exports = {
     'object-curly-spacing': 'off',
     'padded-blocks': 'off',
     'comma-dangle': 'off',
+
   },
 };

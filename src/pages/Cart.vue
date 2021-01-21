@@ -24,10 +24,10 @@
       <div class="service_div">
         <h3>Shipping Address</h3>
         <select class="country" >
-          <option value="female">Австралия</option>
-          <option value="male">Австрия</option>
-          <option value="female">Азербайджан</option>
-          <option value="male" selected>Bangladesh</option>
+          <option value="arg">Argentina</option>
+          <option value="aus">Australia</option>
+          <option value="aut">Austria</option>
+          <option value="bel" selected>Belgium</option>
         </select>
         <input type="text" class="service_input" placeholder="State">
         <input type="text" class="service_input" placeholder="Postcode / Zip">

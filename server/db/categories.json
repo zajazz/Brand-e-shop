@@ -68,6 +68,34 @@
         {
             "id": 8,
             "name": "Leggings/Pants"
+        },
+        {
+            "id": 9,
+            "name": "Hoodies"
+        },
+        {
+            "id": 10,
+            "name": "Polos"
+        },
+        {
+            "id": 11,
+            "name": "Shirts"
+        },
+        {
+            "id": 12,
+            "name": "Shoes"
+        },
+        {
+            "id": 13,
+            "name": "T-shirts"
+        },
+        {
+            "id": 14,
+            "name": "Tanks"
+        },
+        {
+            "id": 15,
+            "name": "Bags"
         }
     ],
     "brands": [

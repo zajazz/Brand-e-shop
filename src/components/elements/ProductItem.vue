@@ -1,6 +1,5 @@
 <template>
   <div class="product">
-
     <router-link :to="link"><div class="product__img-bg">
       <img :alt="good.name" class="product__img" :src="img"></div>
     </router-link>
@@ -9,7 +8,8 @@
         }}</router-link>
       <p class="product__price">${{good.price}}.00</p>
     </div>
-    <!-- Кнопка Add to cart -->
+
+    <!-- Add to cart button -->
     <a class="add_to_cart" @click.prevent="selectFeatures()">
       <img alt="cart" class="cart_img" src=  "../../assets/img/cart_wh.svg">
       <span class="atc_text">Add to Cart </span>
@@ -22,8 +22,11 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 
+
 export default {
   name: 'ProductItem',
+  components: {
+  },
   props: ['good'],
   computed: {
     ...mapState(['brands', 'cart']),
@@ -38,33 +41,11 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['fetchCartData', 'putJson', 'postJson']),
+    ...mapActions(['addToCart']),
     selectFeatures() {
-      // TODO: отдельный метод на кнопку корзины, который открывает модальное окно с выбором
-      // количества, цвета и размера, и при подтверждении вызывает метод addProduct(),
-      // передавая ему полученные значения
-      this.addProduct();
-    },
-    addProduct(qty = 1) {
-      /* id && size && color */
-      const find = this.cart.find((el) => el.id === this.good.id);
-      if (find) {
-        const quantity = find.quantity + qty;
-        this.putJson({ url: '/api/cart', id: find.id, quantity });
-      } else {
-        let prod = {
-          id: this.good.id,
-          name: this.good.name,
-          brand: this.good.brand,
-          color: null,
-          size: null,
-          price: this.good.price,
-          shipping: null,
-          rating: this.good.rating,
-          quantity: qty,
-        };
-        this.postJson({ url: '/api/cart', prod });
-      }
+      // TODO: call for a modal window with order params (size, color, etc.)
+      this.addToCart({ good: this.good, qty: 1 });
+      this.$parent.showPopup(0.5);
     },
   },
 };

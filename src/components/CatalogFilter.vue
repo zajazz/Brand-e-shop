@@ -54,17 +54,17 @@ export default {
       return document.getElementById('slider');
     },
     maxPrice() {
-      return this.$_.max(this.filtered, (good) => good.price).price;
+      return this.$_.max(this.filtered, (good) => good.price).price || 100;
     },
     minPrice() {
-      return this.$_.min(this.filtered, (good) => good.price).price;
+      return this.$_.min(this.filtered, (good) => good.price).price || 0;
     },
   },
   methods: {
     ...mapActions(['filterProducts']),
   },
   mounted() {
-    this.min = this.minPrice;
+    this.min = (this.minPrice === this.maxPrice) ? 0 : this.minPrice;
     this.max = this.maxPrice;
 
     // create price range input
@@ -72,7 +72,7 @@ export default {
       start: [this.min, this.max],
       connect: true,
       range: {
-        min: this.minPrice,
+        min: (this.minPrice === this.maxPrice) ? 0 : this.minPrice,
         max: this.maxPrice,
       }
     });
@@ -81,7 +81,7 @@ export default {
     this.slider.noUiSlider.on('set', (range) => {
       this.min = parseInt(range[0], 10);
       this.max = parseInt(range[1], 10);
-      this.filterProducts(range);
+      this.filterProducts({priceRange: range});
     });
   },
 };

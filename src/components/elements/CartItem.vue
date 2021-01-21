@@ -58,7 +58,7 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
 .cart
   &__item
     display: flex

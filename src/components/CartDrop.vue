@@ -1,8 +1,8 @@
 <template>
   <div class="cart">
-    <router-link to="cart">
+    <router-link :to="{ name: 'Cart' }">
       <img alt="cart" class="header__cart" src="../assets/img/cart_black.svg">
-      <!-- Корзина -->
+      <!-- CART -->
       <div class="cart__drop">
         <div class="cart__items">
           <CartItem v-for="cartItem in cart" v-bind:key="cartItem.id" :item="cartItem"/>
@@ -11,10 +11,11 @@
           <div>TOTAL</div>
           <div>${{ total }}</div>
         </div>
-        <router-link class="cart__checkout" to="checkout">Checkout</router-link>
-        <router-link class="cart__gtc" to="cart">Go to cart</router-link>
+        <router-link class="cart__checkout" to="/checkout">Checkout</router-link>
+        <router-link class="cart__gtc" to="/cart">Go to cart</router-link>
       </div>
     </router-link>
+    <span v-if="cartCount" class="badge">{{ cartCount }}</span>
   </div>
 </template>
 
@@ -32,7 +33,10 @@ export default {
     },
     total() {
       return this.cart.reduce((acc, cur) => acc + (cur.price * cur.quantity), 0).toFixed(2);
-    }
+    },
+    cartCount() {
+      return this.cart.length;
+    },
   },
 };
 </script>
@@ -41,12 +45,22 @@ export default {
 .cart
   position: relative
   z-index: 1
+  & .badge
+    display: block
+    position: absolute
+    top: -4px
+    left: 25px
+    width: 15px
+    height: 15px
+    text-align: center
+    font-size: 12px
+    border-radius: 50%
+    background-color: #f16d7f
+    color: #f0f0f0
   &:hover &__drop
     display: flex
   &__items
-    //overflow-y: scroll
     width: 100%
-    //height: 240px
     display: flex
     align-items: center
     justify-content: flex-start
@@ -94,7 +108,6 @@ export default {
     position: absolute
     left: -72px
     padding: 20px
-    //height: 440px
     width: 262px
     background-color: $bgColor
     border-radius: 5px
